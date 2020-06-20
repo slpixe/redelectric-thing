@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<meta http-equiv="refresh" content="30">
+<div class="row">
+    <div class="card-deck">
+        {% for franchise in franchises %}
+        <dov class="col-sm-3">
+            <div class="card h-100">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Overview</a>
+                        </li>
+                        {% if franchise.film_type is True %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Films: {{franchise.film_num}}</a>
+                        </li>
+                        {% endif %}
+                        {% if franchise.tv_type is True %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Seasons: {{franchise.tv_num}}</a>
+                        </li>
+                        {% endif %}
+                        {% if franchise.oav_type is True %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">OAV's: {{franchise.oav_num}}</a>
+                        </li>
+                        {% endif %}                        
+                    </ul>
+                </div>
+                <img src="{{franchise.thumb.url}}" alt=""
+                    class="card-img-top" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{{franchise.franchise_slug}}"
+                            class="btn btn-primary input-block-level form-control" >{{franchise.franchies_name}}</a></h5>
+                </div>
+            </div>
+        </dov>
+        {% endfor %}
+    </div>
+</div>
+<!-- Next -->
+<h2>Franchise Item</h2>
+<div class="row">
+    <div class="card-deck">
+        {% for franchiseitem in franchiseitems %}
+        <dov class="col-sm-4">
+            <div class="card h-100">
+                <img src="https://screencritix.com/wp-content/uploads/2013/10/the-wolf-children-ame-and-yuki-poster.jpg"
+                    class="card-img-top" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{franchiseitem.name}}</h5>
+                    <p class="card-text">Text Test 01</p>
+
+                    <div class="card-footer"><a
+                            href="https://screencritix.com/wp-content/uploads/2013/10/the-wolf-children-ame-and-yuki-poster.jpg"
+                            class="btn btn-primary" >Button text 01</a>
+                </div>
+                </div>
+                        
+                        
+            </div>
+        </dov>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

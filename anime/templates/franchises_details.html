@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{franchises_details.franchies_name}}</h1>
+    <img src="{{franchises_details.thumb.url}}" alt="">
+    
+    {% if franchises_details.film_type is True %}
+        <h2>Films: {{franchises_details.film_num}}</h2>
+    {% endif %}
+    {% if franchises_details.tv_type is True %}
+        <h2>Seasons: {{franchises_details.tv_num}}</h2>
+    {% endif %}
+    {% if franchises_details.oav_type is True %}
+        <h2>OAV's: {{franchises_details.oav_num}}</ah2
+    {% endif %} 
+{% endblock %}
