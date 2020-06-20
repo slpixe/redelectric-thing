@@ -8,15 +8,18 @@ def signup_view(request):
         if form.is_valid():
             form.save()
             # add log in
-            return redirect('login')           
+            return redirect('anime')
     else:
         form = UserCreationForm()
-    return render(request, 'accounts/signup.html',{'form':form})
+    return render(request, 'accounts/signup.html', {'form': form})
 
 
 def login_view(request):
     if request.method == 'POST':
-      form = AuthenticationForm()  
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            # add log in
+            return redirect('anime')
     else:
         form = AuthenticationForm()
-    return render (request, 'accounts/login.html',{'form':form})
+    return render(request, 'accounts/login.html', {'form': form})

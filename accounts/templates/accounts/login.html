@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Low</h1>
 
-<form action="/login/" method="POST">
+<form action="/signup/login/" method="POST">
     {% csrf_token %}
     {{form}}
     <input type="submit" value="Login">
