@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 
 def signup_view(request):
@@ -8,7 +8,19 @@ def signup_view(request):
         if form.is_valid():
             form.save()
             # add log in
-            return redirect('anime')           
+            return redirect('anime')
     else:
         form = UserCreationForm()
-    return render(request, 'accounts/signup.html',{'form':form})
+    return render(request, 'accounts/signup.html', {'form': form})
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            # add log in
+            return redirect('anime')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'accounts/login.html', {'form': form})
+# Test
