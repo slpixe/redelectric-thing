@@ -1,6 +1,7 @@
 # from django.http import HttpResponse
 from django.shortcuts import render
 from . models import Franchise, FranchiseItem
+from django.contrib.auth.decorators import login_required
 
 # def index(request):
 #     return HttpResponse("Hello")
@@ -16,5 +17,6 @@ def franchise_details(request,franchise_slug):
     franchises_details = Franchise.objects.get(franchise_slug=franchise_slug)
     return render(request, 'franchises_details.html',{'franchises_details': franchises_details})
 
+@login_required(login_url="/signup/login")
 def franchise_create(request):
     return render(request, 'franchise_create.html')
