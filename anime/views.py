@@ -15,3 +15,6 @@ def franchise_details(request,franchise_slug):
     # return HttpResponse(franchise_slug)
     franchises_details = Franchise.objects.get(franchise_slug=franchise_slug)
     return render(request, 'franchises_details.html',{'franchises_details': franchises_details})
+
+def franchise_create(request):
+    return render(request, 'franchise_create.html')
