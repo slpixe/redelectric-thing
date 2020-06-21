@@ -24,3 +24,4 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
 # Test
+#Test 02
