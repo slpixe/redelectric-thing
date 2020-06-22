@@ -7,8 +7,8 @@ def signup_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            user =form.save()
-            login(request,user)
+            user = form.save()
+            login(request, user)
             return redirect('anime')
     else:
         form = UserCreationForm()
@@ -20,8 +20,11 @@ def login_view(request):
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
-            login(request,user)
-            return redirect('anime')
+            login(request, user)
+            if 'next' in request.POST:
+                return redirect(request.POST.get('next'))
+            else:
+                return redirect('anime')
     else:
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
@@ -30,4 +33,4 @@ def logout_view(request):
     if request.method == 'POST':
         logout(request)
         return redirect('anime')
-
+        
