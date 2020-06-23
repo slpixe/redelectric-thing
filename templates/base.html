@@ -18,15 +18,21 @@
 
 </head>
 
-
 <body>
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="/anime/">
             <img src="https://media-exp1.licdn.com/dms/image/C5603AQHzSCddxhOB0w/profile-displayphoto-shrink_200_200/0?e=1594252800&v=beta&t=B-dfZMynexg-ceIZioKRtlW-98YK3757RVcZFMz--Ds"
                 width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
             Human Trafficking
+            <!-- {% if user.is_authenticated %}
+                 {{user.username}}
+            {% endif %} -->
+            <!-- poo -->
         </a>
         <ul class="navbar-right">
+            <a class="navbar-brand" href="/signup/login">
+                <button class="btn btn-outline-secondary" type="button">{{user.username}}</button>
+            </a>
             <a class="navbar-brand" href="/signup/">
                 <button class="btn btn-outline-secondary" type="button">
                     <svg class="bi bi-person-plus-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
