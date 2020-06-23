@@ -2,6 +2,11 @@
 
 {% block content %}
 
-<h2>Create a franticse </h2>
+<h2>Create a Franchise  </h2>
 
+<form action="/anime/create/" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+{{ form }}
+<input type="submit" value="Create" >
+</form>
 {% endblock %}
