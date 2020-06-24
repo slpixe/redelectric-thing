@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 AREA_TYPES = [
     ('Film', 'Film'),
@@ -21,9 +22,9 @@ RATINGS = [
 
 
 class Franchise(models.Model):
-    franchies_name = models.CharField(max_length=255)# need to make unique
+    franchies_name = models.CharField(max_length=255, unique=True)
     franchise_slug = models.SlugField()
-    thumb = models.ImageField(default='default.png', blank=True)
+    thumb = models.ImageField(default='default.png', blank=True, unique=True)
 
 
     film_type = models.BooleanField(default=False)
@@ -34,6 +35,8 @@ class Franchise(models.Model):
 
     oav_type = models.BooleanField(default=False)
     oav_num = models.IntegerField()
+
+    author = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
 
     all_user_average = models.IntegerField()
     def __str__(self):
