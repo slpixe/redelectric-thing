@@ -4,10 +4,27 @@
 
 <h2>Create a Franchise  </h2>
 
-<form action="/anime/create/" method="POST" enctype="multipart/form-data">
-{% csrf_token %}
-{{ form }}
+<div class="form-group">
+    <form action="/anime/create/" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
 
-<input type="submit" value="Create" >
-</form>
+    <input type="submit" value="Create" >
+    </form>
+</div>
+
+<!-- <div class="form-group">
+    <form action="/anime/create/" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col">
+            {{ form.franchies_name}}
+        </div>
+        <div class="col">
+            {{ form.franchise_slug}}
+         </div>
+    </div>
+    <input type="submit" value="Create" >
+    </form>
+</div> -->
 {% endblock %}

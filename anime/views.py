@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from . models import Franchise, FranchiseItem
 from . import forms
 from django.contrib.auth.decorators import login_required
+from slugify import slugify
 
 # def index(request):
 #     return HttpResponse("Hello")
@@ -23,9 +24,9 @@ def franchise_create(request):
     if request.method == 'POST':
         form = forms.CreateFranchise(request.POST, request.FILES)
         if form.is_valid():
-            # save to db
             form_save = form.save(commit=False)
             form_save.author = request.user
+            form_save.franchise_slug = slugify(form_save.franchies_name)
             form_save.save()
             return redirect('anime')
     else:
