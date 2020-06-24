@@ -24,6 +24,9 @@ def franchise_create(request):
         form = forms.CreateFranchise(request.POST, request.FILES)
         if form.is_valid():
             # save to db
+            form_save = form.save(commit=False)
+            form_save.author = request.user
+            form_save.save()
             return redirect('anime')
     else:
         form = forms.CreateFranchise()
