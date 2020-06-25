@@ -3,10 +3,6 @@
 <!doctype html>
 <html lang="en">
 
-<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" -->
-<!-- <link rel="stylesheet" href="{% static '/css/bootstrap.min.css'%}"integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" -->
-<!-- <link rel="stylesheet" href="/static/bootstrap.min.css"  -->
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -19,46 +15,33 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="/franchise/">
-            <img src="https://media-exp1.licdn.com/dms/image/C5603AQHzSCddxhOB0w/profile-displayphoto-shrink_200_200/0?e=1594252800&v=beta&t=B-dfZMynexg-ceIZioKRtlW-98YK3757RVcZFMz--Ds"
-                width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
-            Human Trafficking
-        </a>
-        <ul class="navbar-right">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/franchise">Not Velox</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="create/">Create Franchise</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Test cant push<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Test 2</a>
+            </li>
+          </ul>
+          <!-- Username -->
+          <span class="navbar-text">
             {% if user.is_authenticated %}
-            <a class="navbar-brand" href="/signup/login">
+            <a class="navbar-brand" href="#"> <!-- Need to add link to user Profile -->
                 <button class="btn btn-outline-secondary" type="button">{{user.username}}</button>
             </a>
             {% endif %}
-            {% if not user.is_authenticated %}
-            <a class="navbar-brand" href="/signup/">
-                <button class="btn btn-outline-secondary" type="button">
-                    <svg class="bi bi-person-plus-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-                        <path fill-rule="evenodd" d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z" />
-                    </svg>
-                Sign Up
-                </button>
-            </a>
-            {% endif %}
-            {% if not user.is_authenticated %}
-            <a class="navbar-brand" href="/signup/login">
-                <button class="btn btn-outline-secondary" type="button">
-                    <svg class="bi bi-box-arrow-in-right" width="1em" height="1em" viewBox="0 0 16 16"
-                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M8.146 11.354a.5.5 0 0 1 0-.708L10.793 8 8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z" />
-                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 1 8z" />
-                        <path fill-rule="evenodd"
-                            d="M13.5 14.5A1.5 1.5 0 0 0 15 13V3a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 4 3v1.5a.5.5 0 0 0 1 0V3a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5h-8A.5.5 0 0 1 5 13v-1.5a.5.5 0 0 0-1 0V13a1.5 1.5 0 0 0 1.5 1.5h8z" />
-                    </svg>
-                    Login
-                </button>
-            </a>
-            {% endif %}
+          </span>
+          <!-- Log out -->
+          <span class="navbar-text">
             {% if user.is_authenticated %}
             <a class="navbar-brand" href="#">
                 <form action="/signup/logout/" method="POST">
@@ -76,11 +59,45 @@
                     </button>
                 </form>
             </a>
+            {% endif %}            
+          </span>
+          <!-- Sign up -->
+          <span class="navbar-text">
+            {% if not user.is_authenticated %}
+            <a class="navbar-brand" href="/signup/">
+                <button class="btn btn-outline-secondary" type="button">
+                    <svg class="bi bi-person-plus-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                        <path fill-rule="evenodd" d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z" />
+                    </svg>
+                Sign Up
+                </button>
+            </a>
             {% endif %}
-        </ul>
-    </nav>
-
-    <div class="p-3">
+          </span>
+          <!-- Log in -->
+          <span class="navbar-text">
+            {% if not user.is_authenticated %}
+            <a class="navbar-brand" href="/signup/login">
+                <button class="btn btn-outline-secondary" type="button">
+                    <svg class="bi bi-box-arrow-in-right" width="1em" height="1em" viewBox="0 0 16 16"
+                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M8.146 11.354a.5.5 0 0 1 0-.708L10.793 8 8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z" />
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 1 8z" />
+                        <path fill-rule="evenodd"
+                            d="M13.5 14.5A1.5 1.5 0 0 0 15 13V3a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 4 3v1.5a.5.5 0 0 0 1 0V3a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5h-8A.5.5 0 0 1 5 13v-1.5a.5.5 0 0 0-1 0V13a1.5 1.5 0 0 0 1.5 1.5h8z" />
+                    </svg>
+                    Login
+                </button>
+            </a>
+            {% endif %}
+          </span>
+        </div>
+      </nav>
+    <div class="p-3 m-3">
         {% block content %}
         {% endblock %}
     </div>
