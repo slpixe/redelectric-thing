@@ -11,6 +11,12 @@
         <h2>Seasons: {{franchises_details.tv_num}}</h2>
     {% endif %}
     {% if franchises_details.oav_type is True %}
-        <h2>OAV's: {{franchises_details.oav_num}}</ah2
+        <h2>OAV's: {{franchises_details.oav_num}}</ah2>
     {% endif %} 
+    {% if not franchises_user == none %}
+        <h2>You have rated this as {{franchises_user.user_opinion_average}}</h2>
+    {% endif %}
+    {% if franchises_user == none %}
+        <h2>You have not rated this yet, would you like to?</h2>
+    {% endif %}
 {% endblock %}
