@@ -1,6 +1,6 @@
 # from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from . models import Franchise, FranchiseItem
+from . models import Franchise, FranchiseItem, FranchiseUser
 from . import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
@@ -17,9 +17,13 @@ def index(request):
 
 @login_required(login_url="/signup/login")
 def franchise_details(request,franchise_slug):
-    # return HttpResponse(franchise_slug)
     franchises_details = Franchise.objects.get(franchise_slug=franchise_slug)
-    return render(request, 'franchises_details.html', {'franchises_details': franchises_details})
+    try:
+        franchises_user = FranchiseUser.objects.get(franchies_name=franchises_details.id, author=request.user)
+    except:
+        franchises_user = None
+    
+    return render(request, 'franchises_details.html', {'franchises_details': franchises_details, 'franchises_user': franchises_user})
 
 
 @staff_member_required(login_url="/signup/login")

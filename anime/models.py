@@ -13,11 +13,11 @@ MUSIC_TYPES = [
     ('OST', 'OST')
 ]
 RATINGS = [
-    (1, '1'),
-    (2, '2'),
-    (3, '3'),
-    (4, '4'),
-    (5, '5')
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+    ('4', '4'),
+    ('5', '5')
 ]
 
 
@@ -46,6 +46,7 @@ class Franchise(models.Model):
 class UserOverallOpinion(models.Model):
     user_real_average = models.IntegerField()
     user_opinion_average = models.CharField(max_length=255, choices=RATINGS)
+    author = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
 
     class Meta:
         abstract = True
