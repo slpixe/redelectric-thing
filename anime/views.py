@@ -17,13 +17,20 @@ def index(request):
 
 @login_required(login_url="/signup/login")
 def franchise_details(request,franchise_slug):
+    if request.method == 'POST':
+        if (request.POST['test']) == "Show":
+            test = True
+        else:
+            test = False
+    else:
+        test = False
+    
     franchises_details = Franchise.objects.get(franchise_slug=franchise_slug)
     try:
         franchises_user = FranchiseUser.objects.get(franchies_name=franchises_details.id, author=request.user)
     except:
-        franchises_user = None
-    
-    return render(request, 'franchises_details.html', {'franchises_details': franchises_details, 'franchises_user': franchises_user})
+        franchises_user = None    
+    return render(request, 'franchises_details.html', {'franchises_details': franchises_details, 'franchises_user': franchises_user, 'test': test})
 
 
 @staff_member_required(login_url="/signup/login")
