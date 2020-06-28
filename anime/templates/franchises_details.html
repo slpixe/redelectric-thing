@@ -12,101 +12,100 @@
 {% endif %}
 {% if franchises_details.oav_type is True %}
 <h2>OAV's: {{franchises_details.oav_num}}</ah2>
-    {% endif %}
-    {% if not franchises_user == none %}
-    <h2>You have rated this as {{franchises_user.user_opinion_average}}</h2>
-    {% endif %}
-    {% if franchises_user == none %}
-    <h2>You have not rated this yet, would you like to?</h2>
-    {% endif %}
+{% endif %}
+{% if not franchises_user == none %}
+<h2>You have rated this as {{franchises_user.user_opinion_average}}</h2>
+{% endif %}
+{% if franchises_user == none %}
+<h2>You have not rated this yet, would you like to?</h2>
+{% endif %}
 
 
-    <p>
-        <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button"
-            aria-expanded="false" aria-controls="multiCollapseExample1">Toggle first element</a>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2"
-            aria-expanded="false" aria-controls="multiCollapseExample2">Toggle second element</button>
+<p>
+    <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button"
+        aria-expanded="false" aria-controls="multiCollapseExample1">Toggle first element</a>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2"
+        aria-expanded="false" aria-controls="multiCollapseExample2">Toggle second element</button>
 
-    </p>
-    <div class="row">
-        <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample1">
-                <div class="card card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                </div>
+</p>
+<div class="row">
+    <div class="col">
+        <div class="collapse multi-collapse" id="multiCollapseExample1">
+            <div class="card card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
             </div>
-            <div class="collapse multi-collapse" id="multiCollapseExample2">
-                <div class="card card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                </div>
+        </div>
+        <div class="collapse multi-collapse" id="multiCollapseExample2">
+            <div class="card card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
             </div>
         </div>
     </div>
+</div>
 
 
 
 
 
-    <script>
-        var filmCompSelect = false;
-        var filmMainSelect = false;
-        function firstLoad(){
-            document.getElementById('film_table_comp').style.display='none';
-            document.getElementById('film_table_comp').class='';
-            
-        }
-        function filmComp() {
-            console.log('Comp = Run', typeof filmCompSelect, filmCompSelect);
-            if(this.filmMainSelect === true) {
-                
-                if(this.filmCompSelect === true) {
-                    document.getElementById('film_table_comp').style.display='none';
-                    document.getElementById('film_table_comp').class='';
-                    console.log('Comp = True', typeof filmCompSelect, filmCompSelect);
-                    console.log('==============================')
-                    this.filmCompSelect = false;
-                } else {
-                document.getElementById('film_table_comp').style.display='block';
-                document.getElementById('film_table_comp').class='col';
+<script>
+    var filmCompSelect = false;
+    var filmMainSelect = false;
+    function firstLoad() {
+        document.getElementById('film_table_comp').style.display = 'none';
+        document.getElementById('film_table_comp').class = '';
+
+    }
+    function filmComp() {
+        console.log('Comp = Run', typeof filmCompSelect, filmCompSelect);
+        if (this.filmMainSelect === true) {
+
+            if (this.filmCompSelect === true) {
+                document.getElementById('film_table_comp').style.display = 'none';
+                document.getElementById('film_table_comp').class = '';
+                console.log('Comp = True', typeof filmCompSelect, filmCompSelect);
+                console.log('==============================')
+                this.filmCompSelect = false;
+            } else {
+                document.getElementById('film_table_comp').style.display = 'block';
+                document.getElementById('film_table_comp').class = 'col';
                 console.log('Comp = False', typeof filmCompSelect, filmCompSelect);
                 console.log('==============================')
                 this.filmCompSelect = true
-                }
-                              
-            } else {
-                document.getElementById('film_table_comp').style.display='none';
-                document.getElementById('film_table_comp').class='';
-                document.getElementById('film_table_comp').collapse(toggle);
-                console.log('Comps/Main = False', typeof filmCompSelect, filmCompSelect);
-                console.log('==============================')
-                
             }
+
+        } else {
+            document.getElementById('film_table_comp').style.display = 'none';
+            document.getElementById('film_table_comp').class = '';
+            console.log('Comps/Main = False', typeof filmCompSelect, filmCompSelect);
+            console.log('==============================')
+            this.filmCompSelect = false;
         }
-        function filmMain() {
-            console.log('Main = Run', typeof filmMainSelect, filmMainSelect);
-            console.log('Comp - Run', typeof filmCompSelect, filmCompSelect);
-            if(this.filmMainSelect === false) {
-                this.filmMainSelect = true;
-                console.log('Main = False', typeof filmMainSelect, filmMainSelect);
-                console.log('Comp = False', typeof filmCompSelect, filmCompSelect);
-                console.log('==============================')
-                
-            } else {
-                this.filmMainSelect = false;
-                console.log('Main = True', typeof filmMainSelect, filmMainSelect);
-                console.log('Comp = True', typeof filmCompSelect, filmCompSelect);
-                console.log('==============================')
-                filmComp();
-                              
-            }
+    }
+    function filmMain() {
+        console.log('Main = Run', typeof filmMainSelect, filmMainSelect);
+        console.log('Comp - Run', typeof filmCompSelect, filmCompSelect);
+        if (this.filmMainSelect === false) {
+            this.filmMainSelect = true;
+            console.log('Main = False', typeof filmMainSelect, filmMainSelect);
+            console.log('Comp = False', typeof filmCompSelect, filmCompSelect);
+            console.log('==============================')
+
+        } else {
+            this.filmMainSelect = false;
+            console.log('Main = True', typeof filmMainSelect, filmMainSelect);
+            console.log('Comp = True', typeof filmCompSelect, filmCompSelect);
+            console.log('==============================')
+            filmComp();
+
         }
-    </script>
+    }
+</script>
 
 
-    
-    <body onload="firstLoad()">
+
+<body onload="firstLoad()">
     <div id="accordion">
         <div class="card">
             <div class="card-header" id="headingOne">
@@ -115,8 +114,7 @@
                         aria-expanded="false" onclick="filmMain()">
                         Films: {{franchises_details.film_num}}
                     </button>
-                    <button class="btn btn-primary" data-toggle="collapse" href="#film_table_comp_show" role="button"
-                        aria-expanded="false" onclick="filmComp()">
+                    <button class="btn btn-primary" role="button" aria-expanded="false" onclick="filmComp()">
                         Select User to compar
                     </button>
                 </h5>
@@ -124,66 +122,64 @@
 
             <div class="row">
 
-                <div class="col">
-                    <div id="film_table" class="collapse multi-collapse">
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        {{user.username}}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="col">Film 01</th>
-                                        <th scope="col">Story: 5/5</th>
-                                        <th scope="col">Animation: 2/5</th>
-                                        <th scope="col">Music:5/5</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">Film 02</th>
-                                        <th scope="col">Story: 2/5</th>
-                                        <th scope="col">Animation: 2/5</th>
-                                        <th scope="col">Music: 3/5</th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+            <div class="col">
+                <div id="film_table" class="collapse multi-collapse">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    {{user.username}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="col">Film 01</th>
+                                    <th scope="col">Story: 5/5</th>
+                                    <th scope="col">Animation: 2/5</th>
+                                    <th scope="col">Music:5/5</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Film 02</th>
+                                    <th scope="col">Story: 2/5</th>
+                                    <th scope="col">Animation: 2/5</th>
+                                    <th scope="col">Music: 3/5</th>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-                <div id="film_table_comp" class="col">
-                    <div id="film_table_comp_show" class="collapse multi-collapse">
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        Different User (Add user here)
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="col">Film 01</th>
-                                        <th scope="col">Story: 5/5</th>
-                                        <th scope="col">Animation: 2/5</th>
-                                        <th scope="col">Music:5/5</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">Film 02</th>
-                                        <th scope="col">Story: Not yet rated</th>
-                                        <th scope="col">Animation: Not yet rated</th>
-                                        <th scope="col">Music: Not yet rated</th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
-
-
+            <div id="film_table_comp" class="col">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                Different User (Add user here)
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="col">Film 01</th>
+                                <th scope="col">Story: 5/5</th>
+                                <th scope="col">Animation: 2/5</th>
+                                <th scope="col">Music:5/5</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">Film 02</th>
+                                <th scope="col">Story: Not yet rated</th>
+                                <th scope="col">Animation: Not yet rated</th>
+                                <th scope="col">Music: Not yet rated</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
         </div>
-        {% endblock %}
+
+
+
+
+    </div>
+{% endblock %}
