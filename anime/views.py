@@ -16,21 +16,14 @@ def index(request):
     return render(request, 'anime.html', {'franchises': franchises,'franchiseitems': franchiseitems,})
 
 @login_required(login_url="/signup/login")
-def franchise_details(request,franchise_slug):
-    if request.method == 'POST':
-        if (request.POST['test']) == "Show":
-            test = True
-        else:
-            test = False
-    else:
-        test = False
-    
+def franchise_details(request,franchise_slug):    
     franchises_details = Franchise.objects.get(franchise_slug=franchise_slug)
+    franchise_items = FranchiseItem.objects.all()
     try:
         franchises_user = FranchiseUser.objects.get(franchies_name=franchises_details.id, author=request.user)
     except:
         franchises_user = None    
-    return render(request, 'franchises_details.html', {'franchises_details': franchises_details, 'franchises_user': franchises_user, 'test': test})
+    return render(request, 'franchises_details.html', {'franchises_details': franchises_details, 'franchises_user': franchises_user, 'franchise_items':franchise_items})
 
 
 @staff_member_required(login_url="/signup/login")
