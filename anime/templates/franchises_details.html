@@ -3,9 +3,6 @@
 {% block content %}
 
 
-
-
-
 <div class="dropright show">
     <a class="btn-lg btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Add Items
@@ -67,7 +64,7 @@ function firstLoad() {
     {% for franchise_item_tv in franchise_items_tvs %}
     document.getElementById('tv_table_comp_{{forloop.counter}}').style.display = 'none';
     document.getElementById('tv_table_comp_{{forloop.counter}}').class = '';
-    {% endfor %}
+    {% endfor %}    
 }
 function filmComp() {
     if (this.filmMainSelect === true) {
@@ -162,6 +159,7 @@ function tvMain() {
                 
             </h5>
         </div>
+
         <div class="row">
             {% for franchise_item_film in franchise_items_films %}
             <div class="col">
@@ -176,16 +174,52 @@ function tvMain() {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope="col">Story: 2/5</th>
+                                    <th scope="col">
+                                        {% if franchise_item_user_films == none %}
+                                        Story: Not yet rated
+                                        {% endif %}                                            
+                                        {% for franchise_item_user_film in franchise_item_user_films %}
+                                            {% if franchise_item_film.id == franchise_item_user_film.franchies_item_name.id %}
+                                                Story: {{franchise_item_user_film.story_opinion}}/5                                                
+                                            {% endif %} 
+                                        {% endfor %}
+                                    </th>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Story: 2/5</th>
+                                    <th scope="col">
+                                        {% if franchise_item_user_films == none %}
+                                        Animation: Not yet rated
+                                        {% endif %} 
+                                        {% for franchise_item_user_film in franchise_item_user_films %}
+                                            {% if franchise_item_film.id == franchise_item_user_film.franchies_item_name.id %}
+                                            Animation: {{franchise_item_user_film.animation_opinion}}/5                                                
+                                            {% endif %} 
+                                        {% endfor %}
+                                    </th>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Animation: 2/5</th>
+                                    <th scope="col">
+                                        {% if franchise_item_user_films == none %}
+                                        Music: Not yet rated
+                                        {% endif %} 
+                                        {% for franchise_item_user_film in franchise_item_user_films %}
+                                            {% if franchise_item_film.id == franchise_item_user_film.franchies_item_name.id %}
+                                            Music: {{franchise_item_user_film.music_opinion}}/5                                                
+                                            {% endif %} 
+                                        {% endfor %}
+                                    </th>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Music: 3/5</th>
+                                    <th scope="col">
+                                        {% if franchise_item_user_films == none %}
+                                        Overall: Not yet rated
+                                        {% endif %} 
+                                        {% for franchise_item_user_film in franchise_item_user_films %}
+                                            {% if franchise_item_film.id == franchise_item_user_film.franchies_item_name.id %}
+                                            Overall: {{franchise_item_user_film.user_opinion_average}}/5                                                
+                                            {% endif %} 
+                                        {% endfor %}
+                                    </th>
                                 </tr>
                             </tbody>
                         </table>

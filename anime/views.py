@@ -18,8 +18,11 @@ def index(request):
 @login_required(login_url="/signup/login")
 def franchise_details(request,franchise_slug):    
     franchises_details = Franchise.objects.get(franchise_slug=franchise_slug)
+    
+
     try:
         franchise_items_films = FranchiseItem.objects.filter(franchies_name=franchises_details.id,area_type="Film")
+        
     except:
         franchise_items_films = None
     try:
@@ -27,14 +30,20 @@ def franchise_details(request,franchise_slug):
     except:
         franchise_items_tvs = None
 
-    # franchise_item_user =
-    # FranchiseItemUser
+
+
+    franchise_item_user_films = FranchiseItemUser.objects.filter(franchies_name=franchises_details.id, author=request.user)
+    if not franchise_item_user_films.   exists():
+        franchise_item_user_films = None
+    else:
+        franchise_item_user_films = franchise_item_user_films
+
 
     try:
         franchises_user = FranchiseUser.objects.get(franchies_name=franchises_details.id, author=request.user)
     except:
         franchises_user = None    
-    return render(request, 'franchises_details.html', {'franchises_details': franchises_details, 'franchises_user': franchises_user, 'franchise_items_films':franchise_items_films, 'franchise_items_tvs':franchise_items_tvs})
+    return render(request, 'franchises_details.html', {'franchises_details': franchises_details, 'franchises_user': franchises_user, 'franchise_items_films':franchise_items_films, 'franchise_items_tvs':franchise_items_tvs,'franchise_item_user_films':franchise_item_user_films})
 
 
 @staff_member_required(login_url="/signup/login")

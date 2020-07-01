@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Franchise, FranchiseUser, FranchiseItem, Episides, Music
+from . models import Franchise, FranchiseUser, FranchiseItem, Episides, Music, FranchiseItemUser
 
 
 class FranchiseAdmin(admin.ModelAdmin):
@@ -20,8 +20,12 @@ class EpisidesAdmin(admin.ModelAdmin):
 class MusicAdmin(admin.ModelAdmin):
     list_display = ('song_name',)
 
+class FranchiseItemUserAdmin(admin.ModelAdmin):
+    list_display = ('franchies_item_name', 'franchies_name',)
+
 admin.site.register(Franchise, FranchiseAdmin)
 admin.site.register(FranchiseUser, FranchiseUserAdmin)
 admin.site.register(FranchiseItem, FranchiseItemAdmin)
 admin.site.register(Episides, EpisidesAdmin)
 admin.site.register(Music, MusicAdmin)
+admin.site.register(FranchiseItemUser, FranchiseItemUserAdmin)
