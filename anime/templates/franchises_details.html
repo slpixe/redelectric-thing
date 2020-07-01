@@ -100,12 +100,11 @@ function filmMain() {
 
 <body onload="firstLoad()">
 
-
+{% if franchises_details.film_type is True %}
 <div id="accordion">
     <div class="card">
         <div class="card-header" id="headingOne">
             <h5 class="mb-0">
-                {% if franchises_details.film_type is True %}
                     <button class="btn btn-primary" data-toggle="collapse" href="#film_table" role="button"
                         aria-expanded="false" onclick="filmMain()">
                         Films: {{franchises_details.film_num}}
@@ -113,12 +112,10 @@ function filmMain() {
                     <button class="btn btn-primary" role="button" aria-expanded="false" onclick="filmComp()">
                         Select User to compar
                     </button>
-                {% endif %}
-                <button type="button" class="btn btn-light">
-                    Add New Film
-                </button>
+                
             </h5>
         </div>
+{% endif %}
 
         <div class="row">
             {% for franchise_item_film in franchise_items_films %}
