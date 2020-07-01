@@ -1,156 +1,135 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{franchises_details.franchies_name}}</h1>
-<img src="{{franchises_details.thumb.url}}" alt="">
 
 
-{% if franchises_details.film_type is True %}
-<h2>Films: {{franchises_details.film_num}}</h2>
-{% endif %}
-{% if franchises_details.tv_type is True %}
-<h2>Seasons: {{franchises_details.tv_num}}</h2>
-{% endif %}
-{% if franchises_details.oav_type is True %}
-<h2>OAV's: {{franchises_details.oav_num}}</ah2>
-{% endif %}
-{% if not franchises_user == none %}
-<h2>Average all users: {{franchises_user.user_opinion_average}}</h2>
-{% endif %}
-{% if franchises_user == none %}
-<h2>No one has rated this yet</h2>
-{% endif %}
 
 
-<p>
-    <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button"
-        aria-expanded="false" aria-controls="multiCollapseExample1">Toggle first element</a>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2"
-        aria-expanded="false" aria-controls="multiCollapseExample2">Toggle second element</button>
 
-</p>
-<div class="row">
-    <div class="col">
-        <div class="collapse multi-collapse" id="multiCollapseExample1">
-            <div class="card card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+<div class="dropright show">
+    <a class="btn-lg btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Add Items
+    </a>
+    
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="#">Add Film</a>
+        <a class="dropdown-item" href="#">Add TV</a>
+        <a class="dropdown-item" href="#">Add OAV</a>
+    </div>
+</div>
+    
+<div class="jumbotron">
+    <h1 class="display-4">{{franchises_details.franchies_name}}</h1>
+    <img src="{{franchises_details.thumb.url}}" class="rounded" style="height: 300px;" alt="">
+    <hr class="my-4">    
+    <div class="row">
+        {% if franchises_details.film_type is True %}
+            <div class="col-md-auto">
+            <p>Films: {{franchises_details.film_num}}</p>
             </div>
-        </div>
-        <div class="collapse multi-collapse" id="multiCollapseExample2">
-            <div class="card card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        {% endif %}
+        {% if franchises_details.tv_type is True %}
+            <div class="col-md-auto">
+            <p>Seasons: {{franchises_details.tv_num}}</p>
             </div>
-        </div>
+        {% endif %}
+        {% if franchises_details.oav_type is True %}
+            <div class="col-md-auto">
+            <p>OAV's: {{franchises_details.oav_num}}</p>
+            </div>
+        {% endif %}
+    </div>
+        <div class="row">
+        {% if not franchises_user == none %}
+            <div class="col-md-auto">
+            <p>Average all users: {{franchises_user.user_opinion_average}}</p>
+            </div>
+        {% endif %}
+        {% if franchises_user == none %}
+            <div class="col-md-auto">
+            <p>No one has rated this yet</p>
+            </div>
+        {% endif %}
     </div>
 </div>
 
-
-
 <script type="text/javascript">
-    var filmCompSelect = false;
-    var filmMainSelect = false;
-    function firstLoad() {
-        {% for franchise_item in franchise_items %}
-        document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'none';
-        document.getElementById('film_table_comp_{{forloop.counter}}').class = '';
-        {% endfor %}
+var filmCompSelect = false;
+var filmMainSelect = false;
+function firstLoad() {
+    {% for franchise_item_film in franchise_items_films %}
+    document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'none';
+    document.getElementById('film_table_comp_{{forloop.counter}}').class = '';
+    {% endfor %}
 }
-    function filmComp() {
-        if (this.filmMainSelect === true) {
+function filmComp() {
+    if (this.filmMainSelect === true) {
 
-            if (this.filmCompSelect === true) {
-                {% for franchise_item in franchise_items %}
-                document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'none';
-                document.getElementById('film_table_comp_{{forloop.counter}}').class = '';
-                {% endfor %}
-                this.filmCompSelect = false;
-            } else {
-                {% for franchise_item in franchise_items %}
-                document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'block';
-                document.getElementById('film_table_comp_{{forloop.counter}}').class = 'col';
-                {% endfor %}
-                this.filmCompSelect = true
-            }
-
-        } else {
-            {% for franchise_item in franchise_items %}
+        if (this.filmCompSelect === true) {
+            {% for franchise_item_film in franchise_items_films %}
             document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'none';
             document.getElementById('film_table_comp_{{forloop.counter}}').class = '';
             {% endfor %}
             this.filmCompSelect = false;
-        }
-    }
-    function filmMain() {
-        if (this.filmMainSelect === false) {
-            this.filmMainSelect = true;
         } else {
-            this.filmMainSelect = false;
-            filmComp();
-
+            {% for franchise_item_film in franchise_items_films %}
+            document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'block';
+            document.getElementById('film_table_comp_{{forloop.counter}}').class = 'col';
+            {% endfor %}
+            this.filmCompSelect = true
         }
+
+    } else {
+        {% for franchise_item_film in franchise_items_films %}
+        document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'none';
+        document.getElementById('film_table_comp_{{forloop.counter}}').class = '';
+        {% endfor %}
+        this.filmCompSelect = false;
     }
+}
+function filmMain() {
+    if (this.filmMainSelect === false) {
+        this.filmMainSelect = true;
+    } else {
+        this.filmMainSelect = false;
+        filmComp();
+
+    }
+}
 </script>
 
-
-
 <body onload="firstLoad()">
-    <div id="accordion">
-        <div class="card">
-            <div class="card-header" id="headingOne">
-                <h5 class="mb-0">
+
+
+<div id="accordion">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                {% if franchises_details.film_type is True %}
                     <button class="btn btn-primary" data-toggle="collapse" href="#film_table" role="button"
                         aria-expanded="false" onclick="filmMain()">
                         Films: {{franchises_details.film_num}}
                     </button>
                     <button class="btn btn-primary" role="button" aria-expanded="false" onclick="filmComp()">
-                        Select User to compar 
+                        Select User to compar
                     </button>
-                </h5>
-            </div>
+                {% endif %}
+                <button type="button" class="btn btn-light">
+                    Add New Film
+                </button>
+            </h5>
+        </div>
 
-            <div class="row">
-            {% for franchise_item in franchise_items %}
-                <div class="col">
-                    <div id="film_table" class="collapse multi-collapse">
-                        <div class="card-body">
-                            {{user.username}}
-                            <table class="table table-hover">                            
-                                <thead class="table-primary">
-                                    <tr>
-                                        <th scope="col">{{franchise_item.name}}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="col">Story: 2/5</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">Story: 2/5</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">Animation: 2/5</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">Music: 3/5</th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-
-            {% for franchise_item in franchise_items %}
-            <div class="col" id="film_table_comp_{{ forloop.counter }}">
+        <div class="row">
+            {% for franchise_item_film in franchise_items_films %}
+            <div class="col">
                 <div id="film_table" class="collapse multi-collapse">
                     <div class="card-body">
-                        Diff User {{ forloop.counter }}
-                        <table class="table table-hover">                            
-                            <thead class="table-warning">
+                        {{user.username}}
+                        <table class="table table-hover">
+                            <thead class="table-primary">
                                 <tr>
-                                    <th scope="col">{{franchise_item.name}}</th>
+                                    <th scope="col">{{franchise_item_film.name}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -172,5 +151,40 @@
                 </div>
             </div>
             {% endfor %}
+
+            {% for franchise_item_film in franchise_items_films %}
+            <div class="col" id="film_table_comp_{{ forloop.counter }}">
+                <div id="film_table" class="collapse multi-collapse">
+                    <div class="card-body">
+                        Diff User {{ forloop.counter }}
+                        <table class="table table-hover">
+                            <thead class="table-warning">
+                                <tr>
+                                    <th scope="col">{{franchise_item_film.name}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="col">Story: 2/5</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Story: 2/5</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Animation: 2/5</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Music: 3/5</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
         </div>
+    </div>
+</div>
+</body>
 {% endblock %}
