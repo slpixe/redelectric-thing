@@ -22,6 +22,10 @@ def franchise_details(request,franchise_slug):
         franchise_items_films = FranchiseItem.objects.filter(franchies_name=franchises_details.id,area_type="Film")
     except:
         franchise_items_films = None
+    try:
+        franchise_items_tvs = FranchiseItem.objects.filter(franchies_name=franchises_details.id,area_type="TV")
+    except:
+        franchise_items_tvs = None
 
     # franchise_item_user =
     # FranchiseItemUser
@@ -30,7 +34,7 @@ def franchise_details(request,franchise_slug):
         franchises_user = FranchiseUser.objects.get(franchies_name=franchises_details.id, author=request.user)
     except:
         franchises_user = None    
-    return render(request, 'franchises_details.html', {'franchises_details': franchises_details, 'franchises_user': franchises_user, 'franchise_items_films':franchise_items_films})
+    return render(request, 'franchises_details.html', {'franchises_details': franchises_details, 'franchises_user': franchises_user, 'franchise_items_films':franchise_items_films, 'franchise_items_tvs':franchise_items_tvs})
 
 
 @staff_member_required(login_url="/signup/login")

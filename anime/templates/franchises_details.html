@@ -56,10 +56,17 @@
 <script type="text/javascript">
 var filmCompSelect = false;
 var filmMainSelect = false;
+var tvCompSelect = false;
+var tvMainSelect = false;
+
 function firstLoad() {
     {% for franchise_item_film in franchise_items_films %}
     document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'none';
     document.getElementById('film_table_comp_{{forloop.counter}}').class = '';
+    {% endfor %}
+    {% for franchise_item_tv in franchise_items_tvs %}
+    document.getElementById('tv_table_comp_{{forloop.counter}}').style.display = 'none';
+    document.getElementById('tv_table_comp_{{forloop.counter}}').class = '';
     {% endfor %}
 }
 function filmComp() {
@@ -96,6 +103,46 @@ function filmMain() {
 
     }
 }
+
+
+
+function tvComp() {
+    if (this.tvMainSelect === true) {
+
+        if (this.tvCompSelect === true) {
+            {% for franchise_item_tv in franchise_items_tvs %}
+            document.getElementById('tv_table_comp_{{forloop.counter}}').style.display = 'none';
+            document.getElementById('tv_table_comp_{{forloop.counter}}').class = '';
+            {% endfor %}
+            this.tvCompSelect = false;
+        } else {
+            {% for franchise_item_tv in franchise_items_tvs %}
+            document.getElementById('tv_table_comp_{{forloop.counter}}').style.display = 'block';
+            document.getElementById('tv_table_comp_{{forloop.counter}}').class = 'col';
+            {% endfor %}
+            this.tvCompSelect = true
+        }
+
+    } else {
+        {% for franchise_item_tv in franchise_items_tvs %}
+        document.getElementById('tv_table_comp_{{forloop.counter}}').style.display = 'none';
+        document.getElementById('tv_table_comp_{{forloop.counter}}').class = '';
+        {% endfor %}
+        this.tvCompSelect = false;
+    }
+}
+function tvMain() {
+    if (this.tvMainSelect === false) {
+        this.tvMainSelect = true;
+    } else {
+        this.tvMainSelect = false;
+        tvComp();
+
+    }
+}
+
+
+
 </script>
 
 <body onload="firstLoad()">
@@ -115,8 +162,6 @@ function filmMain() {
                 
             </h5>
         </div>
-{% endif %}
-
         <div class="row">
             {% for franchise_item_film in franchise_items_films %}
             <div class="col">
@@ -153,7 +198,7 @@ function filmMain() {
             <div class="col" id="film_table_comp_{{ forloop.counter }}">
                 <div id="film_table" class="collapse multi-collapse">
                     <div class="card-body">
-                        Diff User {{ forloop.counter }}
+                        Diff User Name
                         <table class="table table-hover">
                             <thead class="table-warning">
                                 <tr>
@@ -183,5 +228,92 @@ function filmMain() {
         </div>
     </div>
 </div>
+{% endif %}
+
+{% if franchises_details.tv_type is True %}
+<div id="accordion">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                    <button class="btn btn-primary" data-toggle="collapse" href="#tv_table" role="button"
+                        aria-expanded="false" onclick="tvMain()">
+                        Seasons: {{franchises_details.tv_num}}
+                    </button>
+                    <button class="btn btn-primary" role="button" aria-expanded="false" onclick="tvComp()">
+                        Select User to compar
+                    </button>
+                
+            </h5>
+        </div>
+        <div class="row">
+            {% for franchise_items_tv in franchise_items_tvs %}
+            <div class="col">
+                <div id="tv_table" class="collapse multi-collapse">
+                    <div class="card-body">
+                        {{user.username}}
+                        <table class="table table-hover">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th scope="col">{{franchise_items_tv.name}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="col">Story: 2/5</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Story: 2/5</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Animation: 2/5</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Music: 3/5</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% for franchise_items_tv in franchise_items_tvs %}
+            <div class="col" id="tv_table_comp_{{ forloop.counter }}">
+                <div id="tv_table" class="collapse multi-collapse">
+                    <div class="card-body">
+                        Diff User Name
+                        <table class="table table-hover">
+                            <thead class="table-warning">
+                                <tr>
+                                    <th scope="col">{{franchise_items_tv.name}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="col">Story: 2/5</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Story: 2/5</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Animation: 2/5</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Music: 3/5</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+
 </body>
 {% endblock %}
