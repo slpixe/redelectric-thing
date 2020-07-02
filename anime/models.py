@@ -82,6 +82,7 @@ class FranchiseItem(models.Model):
 class FranchiseItemUser(UserOverallOpinion):
     franchies_name = models.ForeignKey(Franchise, on_delete=models.CASCADE)
     franchies_item_name = models.ForeignKey(FranchiseItem, on_delete=models.CASCADE)
+    area_type = models.CharField(max_length=255, choices=AREA_TYPES)
     animation_opinion = models.IntegerField()
     story_opinion = models.IntegerField()
     op_num = models.IntegerField()

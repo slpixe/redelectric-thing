@@ -20,6 +20,7 @@ def franchise_details(request,franchise_slug):
     franchises_details = Franchise.objects.get(franchise_slug=franchise_slug)
     
 
+    #Franchise items opinion items VVVV 
     try:
         franchise_items_films = FranchiseItem.objects.filter(franchies_name=franchises_details.id,area_type="Film")
         
@@ -29,21 +30,23 @@ def franchise_details(request,franchise_slug):
         franchise_items_tvs = FranchiseItem.objects.filter(franchies_name=franchises_details.id,area_type="TV")
     except:
         franchise_items_tvs = None
+    #Franchise items opinion items ^^^^^^
 
-
-
-    franchise_item_user_films = FranchiseItemUser.objects.filter(franchies_name=franchises_details.id, author=request.user)
-    if not franchise_item_user_films.   exists():
-        franchise_item_user_films = None
-    else:
-        franchise_item_user_films = franchise_item_user_films
-
-
+    #User opinion items VVVV 
+    franchise_item_users_film = FranchiseItemUser.objects.filter(franchies_name=franchises_details.id, author=request.user, area_type="Film")
+    if not franchise_item_users_film.exists():
+        franchise_item_users_film = None
+    
+    franchise_item_users_tv = FranchiseItemUser.objects.filter(franchies_name=franchises_details.id, author=request.user, area_type="TV")
+    if not franchise_item_users_tv.exists():
+        franchise_item_users_tv = None
+        
+    #User opinion items ^^^^^^
     try:
         franchises_user = FranchiseUser.objects.get(franchies_name=franchises_details.id, author=request.user)
     except:
         franchises_user = None    
-    return render(request, 'franchises_details.html', {'franchises_details': franchises_details, 'franchises_user': franchises_user, 'franchise_items_films':franchise_items_films, 'franchise_items_tvs':franchise_items_tvs,'franchise_item_user_films':franchise_item_user_films})
+    return render(request, 'franchises_details.html', {'franchises_details': franchises_details, 'franchises_user': franchises_user, 'franchise_items_films':franchise_items_films, 'franchise_items_tvs':franchise_items_tvs,'franchise_item_users_film':franchise_item_users_film,'franchise_item_users_tv':franchise_item_users_tv})
 
 
 @staff_member_required(login_url="/signup/login")
