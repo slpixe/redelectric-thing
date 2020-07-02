@@ -120,6 +120,17 @@ function filmMain() {
 
 <body onload="firstLoad()">
 
+
+
+    
+
+
+
+
+
+
+
+
 {% if franchises_details.film_type is True or franchises_details.tv_type is True or franchises_details.oav_type is True %}
 <div id="accordion">
     <div class="card">
@@ -132,7 +143,8 @@ function filmMain() {
                         {% endif %} 
                         {% if franchises_details.tv_type is True %}
                         <button class="btn btn-primary" data-toggle="collapse" href="#tv_table" role="button"
-                        aria-expanded="false" onclick="tvMain()">
+                        aria-expanded="false" onclick="filmMain()">
+                        <!-- THere is now a bug here where it will open close compar -->
                         Seasons: {{franchises_details.tv_num}}
                     </button>
                     {% endif %}
@@ -149,11 +161,12 @@ function filmMain() {
                     
             
         </div>
+        <div id="table_items">
 <!-- Films VVVVVVVVVVVVVV -->
         <div class="row">
             {% for franchise_item_film in franchise_items_films %}
             <div class="col">
-                <div id="film_table" class="collapse multi-collapse">
+                <div id="film_table" class="collapse multi-collapse" data-parent="#table_items">
                     <div class="card-body">
                         {{user.username}}
                         <table class="table table-hover">
@@ -254,7 +267,7 @@ function filmMain() {
         <div class="row">
             {% for franchise_items_tv in franchise_items_tvs %}
             <div class="col">
-                <div id="tv_table" class="collapse multi-collapse">
+                <div id="tv_table" class="collapse multi-collapse" data-parent="#table_items">
                     <div class="card-body">
                         {{user.username}}
                         <table class="table table-hover">
@@ -354,5 +367,6 @@ function filmMain() {
     </div>
 </div>
 {% endif %}
+</div>
 </body>
 {% endblock %}
