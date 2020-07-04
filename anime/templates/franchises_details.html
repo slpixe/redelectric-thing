@@ -52,74 +52,79 @@
 </div>
 
 <script type="text/javascript">
-    var filmCompSelect = false;
-    var filmMainSelect = false;
-    var tvCompSelect = false;
-    var tvMainSelect = false;
 
-    function firstLoad() {
-        {% for franchise_item_film in franchise_items_films %}
-        document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'none';
-        document.getElementById('film_table_comp_{{forloop.counter}}').class = '';
-        {% endfor %}
-        {% for franchise_item_tv in franchise_items_tvs %}
-        document.getElementById('tv_table_comp_{{forloop.counter}}').style.display = 'none';
-        document.getElementById('tv_table_comp_{{forloop.counter}}').class = '';
-        {% endfor %}
+
+function firstLoad() {
+    {% for franchise_item_film in franchise_items_films %}
+    document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'none';
+    document.getElementById('film_table_comp_{{forloop.counter}}').class = '';
+    {% endfor %}
+    {% for franchise_item_tv in franchise_items_tvs %}
+    document.getElementById('tv_table_comp_{{forloop.counter}}').style.display = 'none';
+    document.getElementById('tv_table_comp_{{forloop.counter}}').class = '';
+    {% endfor %}
+    document.getElementById('film_button').style.display = 'none';
+    document.getElementById('tv_button').style.display = 'none';
+}
+function filmComp() {
+
+    {% for franchise_item_film in franchise_items_films %}
+    var film_comp_toggle = document.getElementById('film_table_comp_{{forloop.counter}}')
+    if (film_comp_toggle.style.display === "block") {
+        film_comp_toggle.style.display = 'none';
+        console.log('film_table_comp_{{forloop.counter}}:none'); 
+    } else {
+        film_comp_toggle.style.display = 'block';
+        console.log('film_table_comp_{{forloop.counter}}:block'); 
+    }            
+    {% endfor %}
+}
+function filmButton() {
+    var tv_comp_toggle_show = document.getElementById('tv_button')
+    var film_comp_toggle_show = document.getElementById('film_button')
+    if (film_comp_toggle_show.style.display === "none"){
+        film_comp_toggle_show.style.display = "block";
+        tv_comp_toggle_show.style.display = "none";
+    } else {
+        film_comp_toggle_show.style.display = "none";
     }
-    function filmComp() {
-        if (this.filmMainSelect === true || this.tvMainSelect === true) {
+}
 
-            if (this.filmCompSelect === true || this.tvCompSelect === true) {
-                {% for franchise_item_film in franchise_items_films %}
-                document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'none';
-                document.getElementById('film_table_comp_{{forloop.counter}}').class = '';
-                {% endfor %}
-                this.filmCompSelect = false;
 
-                {% for franchise_item_tv in franchise_items_tvs %}
-                document.getElementById('tv_table_comp_{{forloop.counter}}').style.display = 'none';
-                document.getElementById('tv_table_comp_{{forloop.counter}}').class = '';
-                {% endfor %}
-                this.tvCompSelect = false;
-            } else {
-                {% for franchise_item_film in franchise_items_films %}
-                document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'block';
-                document.getElementById('film_table_comp_{{forloop.counter}}').class = 'col';
-                {% endfor %}
-                this.filmCompSelect = true
-                {% for franchise_item_tv in franchise_items_tvs %}
-                document.getElementById('tv_table_comp_{{forloop.counter}}').style.display = 'block';
-                document.getElementById('tv_table_comp_{{forloop.counter}}').class = 'col';
-                {% endfor %}
-                this.tvCompSelect = true
-            }
-
-        } else {
-            {% for franchise_item_film in franchise_items_films %}
-            document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'none';
-            document.getElementById('film_table_comp_{{forloop.counter}}').class = '';
-            {% endfor %}
-            this.filmCompSelect = false;
-            {% for franchise_item_tv in franchise_items_tvs %}
-            document.getElementById('tv_table_comp_{{forloop.counter}}').style.display = 'none';
-            document.getElementById('tv_table_comp_{{forloop.counter}}').class = '';
-            {% endfor %}
-            this.tvCompSelect = false;
-        }
+function tvComp() {
+    {% for franchise_item_tv in franchise_items_tvs %}
+    var tv_comp_toggle = document.getElementById('tv_table_comp_{{forloop.counter}}')
+    if (tv_comp_toggle.style.display === "block"){
+        tv_comp_toggle.style.display = 'none';
+        // tv_comp_toggle.class = '';
+        console.log('tv_table_comp_{{forloop.counter}}:none'); 
+    } else {
+        tv_comp_toggle.style.display = 'block';
+        // tv_comp_toggle.class = 'col';
+        console.log('tv_table_comp_{{forloop.counter}}:block'); 
+    }            
+    {% endfor %}
+}
+function tvButton() {
+    var tv_comp_toggle_show = document.getElementById('tv_button')
+    var film_comp_toggle_show = document.getElementById('film_button')
+    if (tv_comp_toggle_show.style.display === "none"){
+        tv_comp_toggle_show.style.display = "block";
+        film_comp_toggle_show.style.display = "none";
+    } else {
+        tv_comp_toggle_show.style.display = "none";
     }
-    function filmMain() {
-        if (this.filmMainSelect === false || this.tvMainSelect === false) {
-            this.filmMainSelect = true;
-        } else {
-            this.filmMainSelect = false;
-            filmComp();
+}
 
-        }
-    }
+function allComp() {
+    filmComp();
+    tvComp();    
+}
+
 </script>
 
 <body onload="firstLoad()">
+
 
     {% if franchises_details.film_type is True or franchises_details.tv_type is True or franchises_details.oav_type is True %}
     <div class="card">
@@ -127,28 +132,36 @@
             <div class="btn-group mr-2" role="group" aria-label="fist group">
                 {% if franchises_details.film_type is True %}
                 <button class="btn btn-primary" data-toggle="collapse" href="#film_table" role="button"
-                    aria-expanded="false" onclick="filmMain()">
+                    aria-expanded="false" onclick="filmButton()">
                     Films: {{franchises_details.film_num}}
                 </button>
                 {% endif %}
                 {% if franchises_details.tv_type is True %}
-                <button class="btn btn-primary" data-toggle="collapse" href="#tv_table" role="button"
-                    aria-expanded="false" onclick="filmMain()">
-                    <!-- THere is now a bug here where it will open close compar -->
+                <button class="btn btn-primary" data-toggle="collapse" href="#tv_table" role="button" 
+                    aria-expanded="false" onclick="tvButton()">
                     Seasons: {{franchises_details.tv_num}}
                 </button>
                 {% endif %}
             </div>
-            <div class="btn-group" role="group" aria-label="Second group">
-                <button class="btn btn-primary" role="button" aria-expanded="false" onclick="filmComp()">
-                    Select User to compar
-                </button>
-            </div>
         </div>
     </div>
     <div id="table_items">
+        <div id="film_button">
+            <div class="btn-group" role="group" aria-label="Second group">
+                <button class="btn btn-primary" role="button" onclick="allComp()">
+                    Select User to compare
+                </button>
+            </div>
+        </div>
+        <div id="tv_button">
+            <div class="btn-group" role="group" aria-label="Second group">
+                <button class="btn btn-primary" role="button" aria-expanded="false" onclick="allComp()">
+                    Select User to compare
+                </button>
+            </div>
+        </div>
         <!-- Films VVVVVVVVVVVVVV -->
-        <div class="row">
+        <div class="row">            
             {% for franchise_item_film in franchise_items_films %}
             <div class="col">
                 <div id="film_table" class="collapse multi-collapse" data-parent="#table_items">
@@ -218,7 +231,7 @@
 
             {% for franchise_item_film in franchise_items_films %}
             <div class="col" id="film_table_comp_{{ forloop.counter }}">
-                <div id="film_table" class="collapse multi-collapse">
+                <div id="film_table" class="collapse multi-collapse" data-parent="#table_items">
                     <div class="card-body">
                         Diff User Name
                         <table class="table table-hover">
@@ -319,7 +332,7 @@
 
             {% for franchise_items_tv in franchise_items_tvs %}
             <div class="col" id="tv_table_comp_{{ forloop.counter }}">
-                <div id="tv_table" class="collapse multi-collapse">
+                <div id="tv_table" class="collapse multi-collapse" data-parent="#table_items">
                     <div class="card-body">
                         Diff User Name
                         <table class="table table-hover">
