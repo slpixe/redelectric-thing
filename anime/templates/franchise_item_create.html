@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+{{franchises_details.franchies_name}}
+{{area}}
+</div>
+<img src="{{franchises_details.thumb.url}}" class="rounded pt-3" style="height: 300px;" alt="">
+
+<div class="form-group">
+    <form action="/{{franchises_details.franchise_slug}}/{{area|lower}}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        Item Name: {{form.name}}
+        {% if not area == "Film" %}
+            Number of Ep:{{form.number_of_episodes}}
+        {% endif %}
+        <input type="submit" class="btn btn-primary" value="Create">
+    </form>
+</div>
+
+{% endblock %}

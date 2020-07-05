@@ -9,7 +9,19 @@ class CreateFranchise(forms.ModelForm):
         widgets = {
             "franchies_name": forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Name of Franchise"}),
             "thumb": forms.FileInput(attrs={'class': 'form-control-file'}),
-            "film_num": forms.NumberInput(attrs={'class': 'form-control' }),
+            "film_num": forms.NumberInput(attrs={'class': 'form-control'}),
             "tv_num": forms.NumberInput(attrs={'class': 'form-control'}),
             "oav_num": forms.NumberInput(attrs={'class': 'form-control'}),
         }
+
+
+class CreateFranchiseItemNoEp(forms.ModelForm):
+    class Meta:
+        model = models.FranchiseItem
+        fields = ["name",]
+
+
+class CreateFranchiseItemEp(forms.ModelForm):
+    class Meta:
+        model = models.FranchiseItem
+        fields = ["name","number_of_episodes",]

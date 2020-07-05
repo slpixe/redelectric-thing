@@ -77,3 +77,64 @@ def franchise_create(request):
     else:
         form = forms.CreateFranchise()
     return render(request, 'franchise_create.html', {'form': form})
+
+def franchise_item_create_film(request,franchise_slug):
+    area = "Film"
+    form_type = forms.CreateFranchiseItemNoEp
+    franchises_details = Franchise.objects.get(franchise_slug=franchise_slug)
+    if request.method == 'POST':
+        form = form_type(request.POST)
+        if form.is_valid():
+            form_instance = form.save(commit=False)
+            form_instance.author = request.user
+            form_instance.franchies_name_id = franchises_details.id
+            form_instance.area_type = area
+            if area == "Film":
+                form_instance.number_of_episodes = 0
+            form_instance.all_user_average = 0
+            form_instance.save()
+            return redirect('/' + franchises_details.franchise_slug)
+    else:       
+        form = form_type()      
+    return render(request, 'franchise_item_create.html',{'franchises_details':franchises_details,'form':form,"area":area})
+
+def franchise_item_create_tv(request,franchise_slug):
+    area = "TV"
+    form_type = forms.CreateFranchiseItemEp
+    franchises_details = Franchise.objects.get(franchise_slug=franchise_slug)
+    if request.method == 'POST':
+        form = form_type(request.POST)
+        if form.is_valid():
+            form_instance = form.save(commit=False)
+            form_instance.author = request.user
+            form_instance.franchies_name_id = franchises_details.id
+            form_instance.area_type = area
+            if area == "Film":
+                form_instance.number_of_episodes = 0
+            form_instance.all_user_average = 0
+            form_instance.save()
+            return redirect('/' + franchises_details.franchise_slug)
+    else:       
+        form = form_type()      
+    return render(request, 'franchise_item_create.html',{'franchises_details':franchises_details,'form':form,"area":area})    
+
+
+def franchise_item_create_oav(request,franchise_slug):
+    area = "OAV"
+    form_type = forms.CreateFranchiseItemEp
+    franchises_details = Franchise.objects.get(franchise_slug=franchise_slug)
+    if request.method == 'POST':
+        form = form_type(request.POST)
+        if form.is_valid():
+            form_instance = form.save(commit=False)
+            form_instance.author = request.user
+            form_instance.franchies_name_id = franchises_details.id
+            form_instance.area_type = area
+            if area == "Film":
+                form_instance.number_of_episodes = 0
+            form_instance.all_user_average = 0
+            form_instance.save()
+            return redirect('/' + franchises_details.franchise_slug)
+    else:       
+        form = form_type()      
+    return render(request, 'franchise_item_create.html',{'franchises_details':franchises_details,'form':form,"area":area})    
