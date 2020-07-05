@@ -36,7 +36,7 @@ class Franchise(models.Model):
     oav_type = models.BooleanField(default=False)
     oav_num = models.IntegerField()
 
-    author = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, default=None, on_delete=models.PROTECT)
 
     all_user_average = models.IntegerField()
     def __str__(self):
@@ -46,42 +46,43 @@ class Franchise(models.Model):
 class UserOverallOpinion(models.Model):
     user_real_average = models.IntegerField()
     user_opinion_average = models.CharField(max_length=255, choices=RATINGS)
-    author = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, default=None, on_delete=models.PROTECT)
 
     class Meta:
         abstract = True
 
 
 class FranchiseUser(UserOverallOpinion):
-    franchies_name = models.ForeignKey(Franchise, on_delete=models.CASCADE)
+    franchies_name = models.ForeignKey(Franchise, on_delete=models.PROTECT)
 
 
 class AllFilmUser(UserOverallOpinion):
-    franchies_name = models.ForeignKey(Franchise, on_delete=models.CASCADE)
+    franchies_name = models.ForeignKey(Franchise, on_delete=models.PROTECT)
 
 
 class AllTVAllSeasonUser(UserOverallOpinion):
-    franchies_name = models.ForeignKey(Franchise, on_delete=models.CASCADE)
+    franchies_name = models.ForeignKey(Franchise, on_delete=models.PROTECT)
 
 
 class AllOAVUser(UserOverallOpinion):
-    franchies_name = models.ForeignKey(Franchise, on_delete=models.CASCADE)
+    franchies_name = models.ForeignKey(Franchise, on_delete=models.PROTECT)
 
 
 class FranchiseItem(models.Model):
-    franchies_name = models.ForeignKey(Franchise, on_delete=models.CASCADE)
+    franchies_name = models.ForeignKey(Franchise, on_delete=models.PROTECT)
     area_type = models.CharField(max_length=255, choices=AREA_TYPES)
     name = models.CharField(max_length=255)
     number_of_episodes = models.IntegerField()
     all_user_average = models.IntegerField()
+    author = models.ForeignKey(User, default=None, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
 
 
 class FranchiseItemUser(UserOverallOpinion):
-    franchies_name = models.ForeignKey(Franchise, on_delete=models.CASCADE)
-    franchies_item_name = models.ForeignKey(FranchiseItem, on_delete=models.CASCADE)
+    franchies_name = models.ForeignKey(Franchise, on_delete=models.PROTECT)
+    franchies_item_name = models.ForeignKey(FranchiseItem, on_delete=models.PROTECT)
     area_type = models.CharField(max_length=255, choices=AREA_TYPES)
     animation_opinion = models.IntegerField()
     story_opinion = models.IntegerField()
@@ -91,9 +92,9 @@ class FranchiseItemUser(UserOverallOpinion):
 
 
 class Episides(models.Model):
-    franchies_name = models.ForeignKey(Franchise, on_delete=models.CASCADE)
+    franchies_name = models.ForeignKey(Franchise, on_delete=models.PROTECT)
     area_type = models.CharField(max_length=255, choices=AREA_TYPES)
-    franchies_item_name = models.ForeignKey(FranchiseItem, on_delete=models.CASCADE)
+    franchies_item_name = models.ForeignKey(FranchiseItem, on_delete=models.PROTECT)
     episode_number = models.IntegerField()
     all_user_average = models.IntegerField()
     def __int__(self):
@@ -101,17 +102,17 @@ class Episides(models.Model):
 
 
 class EpisidesUser(models.Model):
-    franchies_name = models.ForeignKey(Franchise, on_delete=models.CASCADE)
+    franchies_name = models.ForeignKey(Franchise, on_delete=models.PROTECT)
     area_type = models.CharField(max_length=255, choices=AREA_TYPES)
-    franchies_item_name = models.ForeignKey(FranchiseItem, on_delete=models.CASCADE)
-    episode_number = models.ForeignKey(Episides, on_delete=models.CASCADE)
+    franchies_item_name = models.ForeignKey(FranchiseItem, on_delete=models.PROTECT)
+    episode_number = models.ForeignKey(Episides, on_delete=models.PROTECT)
     user_opinion = models.IntegerField()
 
 
 class Music(models.Model):
-    franchies_name = models.ForeignKey(Franchise, on_delete=models.CASCADE)
+    franchies_name = models.ForeignKey(Franchise, on_delete=models.PROTECT)
     area_type = models.CharField(max_length=255, choices=AREA_TYPES)
-    franchies_item_name = models.ForeignKey(FranchiseItem, on_delete=models.CASCADE)
+    franchies_item_name = models.ForeignKey(FranchiseItem, on_delete=models.PROTECT)
     song_name = models.CharField(max_length=255)
     song_type = models.CharField(max_length=255, choices=MUSIC_TYPES)
     all_user_average = models.IntegerField()
@@ -120,6 +121,6 @@ class Music(models.Model):
 
 
 class MusicUser(models.Model):
-    song_name = models.ForeignKey(Music, on_delete=models.CASCADE)  # need to make unique
+    song_name = models.ForeignKey(Music, on_delete=models.PROTECT)  # need to make unique
     song_rate = models.IntegerField()
     
