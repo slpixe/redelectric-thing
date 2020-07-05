@@ -77,3 +77,11 @@ def franchise_create(request):
     else:
         form = forms.CreateFranchise()
     return render(request, 'franchise_create.html', {'form': form})
+
+def franchise_item_create(request,franchise_slug):
+    franchises_details = Franchise.objects.get(franchise_slug=franchise_slug)
+    if request.method == 'POST':
+        form = forms.CreateFranchiseItem(request.POST)
+    else:       
+        form = forms.CreateFranchiseItem()
+    return render(request, 'franchise_item_create.html',{'franchises_details':franchises_details,'form':form})

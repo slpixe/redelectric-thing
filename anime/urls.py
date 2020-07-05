@@ -4,4 +4,5 @@ urlpatterns = [
     path('', views.index, name="anime"),
     path('create/', views.franchise_create, name="create"),
     path('<slug:franchise_slug>', views.franchise_details,),
+    path('<slug:franchise_slug>/film', views.franchise_item_create,),
 ]

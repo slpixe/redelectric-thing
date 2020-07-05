@@ -114,9 +114,9 @@ function mainButton() {
                     </a>
                 
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">Add Film</a>
-                        <a class="dropdown-item" href="#">Add TV</a>
-                        <a class="dropdown-item" href="#">Add OAV</a>
+                        <a class="dropdown-item" href="{{franchises_details.franchise_slug}}/film">Add Film</a>
+                        <a class="dropdown-item" href="{{franchises_details.franchise_slug}}/tv">Add TV</a>
+                        <a class="dropdown-item" href="{{franchises_details.franchise_slug}}/oav">Add OAV</a>
                     </div>
                 </div>
             </div>
@@ -156,37 +156,36 @@ function mainButton() {
                 </div>
                 {% endfor %}
                 <div id="main_table" class="collapse show multi-collapse" data-parent="#table_items">
-                    
-                        <div class="row m-1 pt-3">
-                            {% if franchises_details.film_type is True %}
-                            <div class="col-md-auto">
-                                Films: {{franchises_details.film_num}}
-                            </div>
-                            {% endif %}
-                            {% if franchises_details.tv_type is True %}
-                            <div class="col-md-auto">
-                                Seasons: {{franchises_details.tv_num}}
-                            </div>
-                            {% endif %}
-                            {% if franchises_details.oav_type is True %}
-                            <div class="col-md-auto">
-                                OAV's: {{franchises_details.oav_num}}
-                            </div>
-                            {% endif %}
+                    <div class="row m-1 pt-3">
+                        {% if franchises_details.film_type is True %}
+                        <div class="col-md-auto">
+                            Films: {{franchises_details.film_num}}
                         </div>
-                        <div class="row m-1">
-                            {% if not franchises_user == none %}
-                            <div class="col-md-auto">
-                                <p>Average all users: {{franchises_user.user_opinion_average}}</p>
-                            </div>
-                            {% endif %}
-                            {% if franchises_user == none %}
-                            <div class="col-md-auto">
-                                <p>No one has rated this yet</p>
-                            </div>
-                            {% endif %}
+                        {% endif %}
+                        {% if franchises_details.tv_type is True %}
+                        <div class="col-md-auto">
+                            Seasons: {{franchises_details.tv_num}}
                         </div>
+                        {% endif %}
+                        {% if franchises_details.oav_type is True %}
+                        <div class="col-md-auto">
+                            OAV's: {{franchises_details.oav_num}}
+                        </div>
+                        {% endif %}
                     </div>
+                    <div class="row m-1">
+                        {% if not franchises_user == none %}
+                        <div class="col-md-auto">
+                            <p>Average all users: {{franchises_user.user_opinion_average}}</p>
+                        </div>
+                        {% endif %}
+                        {% if franchises_user == none %}
+                        <div class="col-md-auto">
+                            <p>No one has rated this yet</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
                 </div>
             </div>            
         <!-- Main ^^^^^^^^^^^^^^ -->
