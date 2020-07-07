@@ -56,12 +56,16 @@ def franchise_details(request,franchise_slug):
 
         #User opinion items VVVV 
         franchise_item_users_film = FranchiseItemUser.objects.filter(franchies_name=franchises_details.id, author=request.user, area_type="Film")
+        franchise_item_users_film_num = franchise_item_users_film.count()
         if not franchise_item_users_film.exists():
             franchise_item_users_film = None
+            franchise_item_users_film_num = 0
         
         franchise_item_users_tv = FranchiseItemUser.objects.filter(franchies_name=franchises_details.id, author=request.user, area_type="TV")
+        franchise_item_users_tv_num = franchise_item_users_tv.count()
         if not franchise_item_users_tv.exists():
             franchise_item_users_tv = None
+            franchise_item_users_tv_num = 0
             
         #User opinion items ^^^^^^
         try:
@@ -69,7 +73,7 @@ def franchise_details(request,franchise_slug):
         except:
             franchises_user = None
 
-    return render(request, 'franchises_details.html', {'franchises_details': franchises_details, 'franchises_user': franchises_user, 'franchise_items_films':franchise_items_films, 'franchise_items_tvs':franchise_items_tvs,'franchise_item_users_film':franchise_item_users_film,'franchise_item_users_tv':franchise_item_users_tv, 'form':form,'area':area})
+    return render(request, 'franchises_details.html', {'franchises_details': franchises_details,'franchises_user': franchises_user, 'franchise_items_films':franchise_items_films, 'franchise_items_tvs':franchise_items_tvs,'franchise_item_users_film':franchise_item_users_film,'franchise_item_users_tv':franchise_item_users_tv, 'form':form,'area':area, 'franchise_item_users_film_num':franchise_item_users_film_num, 'franchise_item_users_tv_num':franchise_item_users_tv_num})
 
 
 @staff_member_required(login_url="/signup/login")

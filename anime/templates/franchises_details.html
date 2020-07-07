@@ -81,7 +81,6 @@ function mainButton() {
 }
 
 </script>
-
 <body onload="firstLoad()">
     
     <div class="card">
@@ -286,19 +285,19 @@ function mainButton() {
                             <tbody>
                                 <tr>
                                     <th scope="col">
-                                        {% if franchise_item_users_film == none %}
+                                        {% if franchise_item_users_film == none or forloop.counter > franchise_item_users_film_num %}
                                         Story: Not yet rated
                                         {% endif %}
                                         {% for franchise_item_user in franchise_item_users_film %}
                                         {% if franchise_item_film.id == franchise_item_user.franchies_item_name.id %}
                                         Story: {{franchise_item_user.story_opinion}}/5
-                                        {% endif %}
+                                        {% endif %} 
                                         {% endfor %}
                                     </th>
                                 </tr>
                                 <tr>
                                     <th scope="col">
-                                        {% if franchise_item_users_film == none %}
+                                        {% if franchise_item_users_film == none or forloop.counter > franchise_item_users_film_num %}
                                         Animation: Not yet rated
                                         {% endif %}
                                         {% for franchise_item_user in franchise_item_users_film %}
@@ -310,7 +309,7 @@ function mainButton() {
                                 </tr>
                                 <tr>
                                     <th scope="col">
-                                        {% if franchise_item_users_film == none %}
+                                        {% if franchise_item_users_film == none or forloop.counter > franchise_item_users_film_num %}
                                         Music: Not yet rated
                                         {% endif %}
                                         {% for franchise_item_user in franchise_item_users_film %}
@@ -322,7 +321,7 @@ function mainButton() {
                                 </tr>
                                 <tr>
                                     <th scope="col">
-                                        {% if franchise_item_users_film == none %}
+                                        {% if franchise_item_users_film == none or forloop.counter > franchise_item_users_film_num %}
                                         Overall: Not yet rated
                                         {% endif %}
                                         {% for franchise_item_user in franchise_item_users_film %}
@@ -387,7 +386,7 @@ function mainButton() {
                             <tbody>
                                 <tr>
                                     <th scope="col">
-                                        {% if franchise_item_users_tv == none %}
+                                        {% if franchise_item_users_tv == none or forloop.counter > franchise_item_users_tv_num %}
                                         Story: Not yet rated
                                         {% endif %}
                                         {% for franchise_item_user in franchise_item_users_tv %}
@@ -399,7 +398,7 @@ function mainButton() {
                                 </tr>
                                 <tr>
                                     <th scope="col">
-                                        {% if franchise_item_users_tv == none %}
+                                        {% if franchise_item_users_tv == none or forloop.counter > franchise_item_users_tv_num %}
                                         Animation: Not yet rated
                                         {% endif %}
                                         {% for franchise_item_user in franchise_item_users_tv %}
@@ -411,7 +410,7 @@ function mainButton() {
                                 </tr>
                                 <tr>
                                     <th scope="col">
-                                        {% if franchise_item_users_tv == none %}
+                                        {% if franchise_item_users_tv == none or forloop.counter > franchise_item_users_tv_num %}
                                         Music: Not yet rated
                                         {% endif %}
                                         {% for franchise_item_user in franchise_item_users_tv %}
@@ -423,7 +422,7 @@ function mainButton() {
                                 </tr>
                                 <tr>
                                     <th scope="col">
-                                        {% if franchise_item_users_tv == none %}
+                                        {% if franchise_item_users_tv == none or forloop.counter > franchise_item_users_tv_num %}
                                         Overall: Not yet rated
                                         {% endif %}
                                         {% for franchise_item_user in franchise_item_users_tv %}
