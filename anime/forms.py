@@ -20,8 +20,17 @@ class CreateFranchiseItemNoEp(forms.ModelForm):
         model = models.FranchiseItem
         fields = ["name",]
 
+        widgets = {
+            "name": forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Item Name"}),
+        }
+
 
 class CreateFranchiseItemEp(forms.ModelForm):
     class Meta:
         model = models.FranchiseItem
         fields = ["name","number_of_episodes",]
+
+        widgets = {
+            "name": forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Item Name"}),
+            "number_of_episodes": forms.NumberInput(attrs={'class': 'form-control'}),
+        }

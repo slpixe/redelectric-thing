@@ -114,15 +114,96 @@ function mainButton() {
                     </a>
                 
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="{{franchises_details.franchise_slug}}/film">Add Film</a>
-                        <a class="dropdown-item" href="{{franchises_details.franchise_slug}}/tv">Add TV</a>
-                        <a class="dropdown-item" href="{{franchises_details.franchise_slug}}/oav">Add OAV</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#filmModal" name="Film">Add Film</a>
+                        </form>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#tvModal" name="TV">Add TV</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#oavModal" name="OAV">Add OAV</a>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
+
+
+    <div class="form-group">
+        <form action="/{{franchises_details.franchise_slug}}" method="POST" enctype="multipart/form-data">
+            <div class="modal fade" id="filmModal" tabindex="-1" role="dialog" aria-labelledby="filmModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="filmModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {{franchises_details.franchies_name}}: Film
+                        {{form.name}}                  
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Create" name="Film"/>
+                    </div>
+                </div>
+                </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="form-group">
+        <form action="/{{franchises_details.franchise_slug}}" method="POST" enctype="multipart/form-data">
+            <div class="modal fade" id="tvModal" tabindex="-1" role="dialog" aria-labelledby="tvModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="tvModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {{franchises_details.franchies_name}}: TV
+                        {{form.name}}
+                        Number of Ep:{{form.number_of_episodes}}                   
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Create" name="TV"/>
+                    </div>
+                </div>
+                </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="form-group">
+        <form action="/{{franchises_details.franchise_slug}}" method="POST" enctype="multipart/form-data">
+            <div class="modal fade" id="oavModal" tabindex="-1" role="dialog" aria-labelledby="oavModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="oavModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {{franchises_details.franchies_name}}: OAV
+                        {{form.name}}
+                        Number of Ep:{{form.number_of_episodes}}                   
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Create" name="OAV"/>
+                    </div>
+                </div>
+                </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
     <div id="table_items">
         <div class="jumbotron">
             <h1 class="display-4">{{franchises_details.franchies_name}}</h1>
