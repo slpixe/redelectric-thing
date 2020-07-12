@@ -4,91 +4,92 @@
 <script type="text/javascript">
 
 
-function firstLoad() {
-    {% for franchise_item_film in franchise_items_films %}
-    document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'none';
-    {% endfor %}
-    {% for franchise_item_tv in franchise_items_tvs %}
-    document.getElementById('tv_table_comp_{{forloop.counter}}').style.display = 'none';
-    {% endfor %}
-    document.getElementById('film_button').style.display = 'none';
-    document.getElementById('tv_button').style.display = 'none';
-}
-function filmComp() {
-
-    {% for franchise_item_film in franchise_items_films %}
-    var film_comp_toggle = document.getElementById('film_table_comp_{{forloop.counter}}')
-    if (film_comp_toggle.style.display === "block") {
-        film_comp_toggle.style.display = 'none';
-        console.log('film_table_comp_{{forloop.counter}}:none'); 
-    } else {
-        film_comp_toggle.style.display = 'block';
-        console.log('film_table_comp_{{forloop.counter}}:block'); 
-    }            
-    {% endfor %}
-}
-function filmButton() {
-    var tv_comp_toggle_show = document.getElementById('tv_button')
-    var film_comp_toggle_show = document.getElementById('film_button')
-    if (film_comp_toggle_show.style.display === "none"){
-        film_comp_toggle_show.style.display = "block";
-        tv_comp_toggle_show.style.display = "none";
-    } else {
-        film_comp_toggle_show.style.display = "none";
+    function firstLoad() {
+        {% for film in films %}
+        document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'none';
+        {% endfor %}
+        {% for franchise_item_tv in franchise_items_tvs %}
+        document.getElementById('tv_table_comp_{{forloop.counter}}').style.display = 'none';
+        {% endfor %}
+        document.getElementById('film_button').style.display = 'none';
+        document.getElementById('tv_button').style.display = 'none';
     }
-}
+    function filmComp() {
 
-
-function tvComp() {
-    {% for franchise_item_tv in franchise_items_tvs %}
-    var tv_comp_toggle = document.getElementById('tv_table_comp_{{forloop.counter}}')
-    if (tv_comp_toggle.style.display === "block"){
-        tv_comp_toggle.style.display = 'none';
-        // tv_comp_toggle.class = '';
-        console.log('tv_table_comp_{{forloop.counter}}:none'); 
-    } else {
-        tv_comp_toggle.style.display = 'block';
-        // tv_comp_toggle.class = 'col';
-        console.log('tv_table_comp_{{forloop.counter}}:block'); 
-    }            
-    {% endfor %}
-}
-function tvButton() {
-    var tv_comp_toggle_show = document.getElementById('tv_button')
-    var film_comp_toggle_show = document.getElementById('film_button')
-    if (tv_comp_toggle_show.style.display === "none"){
-        tv_comp_toggle_show.style.display = "block";
-        film_comp_toggle_show.style.display = "none";
-    } else {
-        tv_comp_toggle_show.style.display = "none";
+        {% for film in films %}
+        var film_comp_toggle = document.getElementById('film_table_comp_{{forloop.counter}}')
+        if (film_comp_toggle.style.display === "block") {
+            film_comp_toggle.style.display = 'none';
+            console.log('film_table_comp_{{forloop.counter}}:none');
+        } else {
+            film_comp_toggle.style.display = 'block';
+            console.log('film_table_comp_{{forloop.counter}}:block');
+        }
+        {% endfor %}
     }
-}
-
-function allComp() {
-    filmComp();
-    tvComp();    
-}
-
-function mainButton() {
-    var tv_comp_toggle_show = document.getElementById('tv_button')
-    var film_comp_toggle_show = document.getElementById('film_button')
-    if (tv_comp_toggle_show.style.display === "block"){
-        tv_comp_toggle_show.style.display = "none";
+    function filmButton() {
+        var tv_comp_toggle_show = document.getElementById('tv_button')
+        var film_comp_toggle_show = document.getElementById('film_button')
+        if (film_comp_toggle_show.style.display === "none") {
+            film_comp_toggle_show.style.display = "block";
+            tv_comp_toggle_show.style.display = "none";
+        } else {
+            film_comp_toggle_show.style.display = "none";
+        }
     }
-    if (film_comp_toggle_show.style.display === "block"){
-        film_comp_toggle_show.style.display = "none";
+
+
+    function tvComp() {
+        {% for franchise_item_tv in franchise_items_tvs %}
+        var tv_comp_toggle = document.getElementById('tv_table_comp_{{forloop.counter}}')
+        if (tv_comp_toggle.style.display === "block") {
+            tv_comp_toggle.style.display = 'none';
+            // tv_comp_toggle.class = '';
+            console.log('tv_table_comp_{{forloop.counter}}:none');
+        } else {
+            tv_comp_toggle.style.display = 'block';
+            // tv_comp_toggle.class = 'col';
+            console.log('tv_table_comp_{{forloop.counter}}:block');
+        }
+        {% endfor %}
     }
-}
+    function tvButton() {
+        var tv_comp_toggle_show = document.getElementById('tv_button')
+        var film_comp_toggle_show = document.getElementById('film_button')
+        if (tv_comp_toggle_show.style.display === "none") {
+            tv_comp_toggle_show.style.display = "block";
+            film_comp_toggle_show.style.display = "none";
+        } else {
+            tv_comp_toggle_show.style.display = "none";
+        }
+    }
+
+    function allComp() {
+        filmComp();
+        tvComp();
+    }
+
+    function mainButton() {
+        var tv_comp_toggle_show = document.getElementById('tv_button')
+        var film_comp_toggle_show = document.getElementById('film_button')
+        if (tv_comp_toggle_show.style.display === "block") {
+            tv_comp_toggle_show.style.display = "none";
+        }
+        if (film_comp_toggle_show.style.display === "block") {
+            film_comp_toggle_show.style.display = "none";
+        }
+    }
 
 </script>
+
 <body onload="firstLoad()">
-    
+
     <div class="card">
         <div class="card-header">
             <div class="btn-group mr-2" role="group" aria-label="main group">
                 <button class="btn btn-primary" data-toggle="collapse" href="#main_table" role="button"
                     aria-expanded="false" onclick="mainButton()">
-                    {{franchises_details.franchies_name}} Deatils   
+                    {{franchises_details.franchies_name}} Deatils
                 </button>
             </div>
             <div class="btn-group mr-2" role="group" aria-label="fist group">
@@ -99,7 +100,7 @@ function mainButton() {
                 </button>
                 {% endif %}
                 {% if franchises_details.tv_type is True %}
-                <button class="btn btn-primary" data-toggle="collapse" href="#tv_table" role="button" 
+                <button class="btn btn-primary" data-toggle="collapse" href="#tv_table" role="button"
                     aria-expanded="false" onclick="tvButton()">
                     Seasons: {{franchises_details.tv_num}}
                 </button>
@@ -107,11 +108,11 @@ function mainButton() {
             </div>
             <div class="btn-group mr-2" role="group" aria-label="second group">
                 <div class="dropright">
-                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Add Items
                     </a>
-                
+
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" data-toggle="modal" data-target="#filmModal" name="Film">Add Film</a>
                         </form>
@@ -126,79 +127,82 @@ function mainButton() {
 
     <div class="form-group">
         <form action="/{{franchises_details.franchise_slug}}" method="POST" enctype="multipart/form-data">
-            <div class="modal fade" id="filmModal" tabindex="-1" role="dialog" aria-labelledby="filmModalLabel" aria-hidden="true">
+            <div class="modal fade" id="filmModal" tabindex="-1" role="dialog" aria-labelledby="filmModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="filmModalLabel">New Film Item</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="filmModalLabel">New Film Item</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {% csrf_token %}
+                            {{franchises_details.franchies_name}}: Film
+                            {{form.name}}
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Create" name="Film" />
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        {% csrf_token %}
-                        {{franchises_details.franchies_name}}: Film
-                        {{form.name}}                  
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" value="Create" name="Film"/>
-                    </div>
-                </div>
-                </div>
                 </div>
             </div>
         </form>
     </div>
     <div class="form-group">
         <form action="/{{franchises_details.franchise_slug}}" method="POST" enctype="multipart/form-data">
-            <div class="modal fade" id="tvModal" tabindex="-1" role="dialog" aria-labelledby="tvModalLabel" aria-hidden="true">
+            <div class="modal fade" id="tvModal" tabindex="-1" role="dialog" aria-labelledby="tvModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="tvModalLabel">New TV Item</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="tvModalLabel">New TV Item</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {% csrf_token %}
+                            {{franchises_details.franchies_name}}: TV
+                            {{form.name}}
+                            <p></p>
+                            Number of Ep:{{form.number_of_episodes}}
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Create" name="TV" />
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        {% csrf_token %}
-                        {{franchises_details.franchies_name}}: TV
-                        {{form.name}}
-                        <p></p>
-                        Number of Ep:{{form.number_of_episodes}}                   
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" value="Create" name="TV"/>
-                    </div>
-                </div>
-                </div>
                 </div>
             </div>
         </form>
     </div>
     <div class="form-group">
         <form action="/{{franchises_details.franchise_slug}}" method="POST" enctype="multipart/form-data">
-            <div class="modal fade" id="oavModal" tabindex="-1" role="dialog" aria-labelledby="oavModalLabel" aria-hidden="true">
+            <div class="modal fade" id="oavModal" tabindex="-1" role="dialog" aria-labelledby="oavModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="oavModalLabel">New OAV Item</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="oavModalLabel">New OAV Item</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {% csrf_token %}
+                            {{franchises_details.franchies_name}}: OAV
+                            {{form.name}}
+                            <p></p>
+                            Number of Ep:{{form.number_of_episodes}}
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Create" name="OAV" />
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        {% csrf_token %}
-                        {{franchises_details.franchies_name}}: OAV
-                        {{form.name}}
-                        <p></p>
-                        Number of Ep:{{form.number_of_episodes}}                   
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" value="Create" name="OAV"/>
-                    </div>
-                </div>
-                </div>
                 </div>
             </div>
         </form>
@@ -214,268 +218,259 @@ function mainButton() {
                     <img src="{{franchises_details.thumb.url}}" class="rounded pt-3" style="height: 300px;" alt="">
                 </div>
                 <div class="col-10">
-        <!-- Comp buttons VVVVVVVVVVVVVV -->
-        <div id="film_button">
-            <div class="btn-group p-3" role="group" aria-label="Second group">
-                <button class="btn btn-primary" role="button" onclick="allComp()">
-                    Select User to compare
-                </button>
-            </div>
-        </div>
-        <div id="tv_button">
-            <div class="btn-group p-3" role="group" aria-label="Second group">
-                <button class="btn btn-primary" role="button" aria-expanded="false" onclick="allComp()">
-                    Select User to compare
-                </button>
-            </div>
-        </div>
-        <!-- Comp buttons ^^^^^^^^^^^^^^ -->
-        <!-- Main VVVVVVVVVVVVVV -->
-        <div class="row">
-            <div class="col">
-                {% for franchise_item_film in franchise_items_films %} 
-                <div id="main_table" class="collapse multi-collapse" data-parent="#table_items">
-                </div>
-                {% endfor %}
-                <div id="main_table" class="collapse show multi-collapse" data-parent="#table_items">
-                    <div class="row m-1 pt-3">
-                        {% if franchises_details.film_type is True %}
-                        <div class="col-md-auto">
-                            Films: {{franchises_details.film_num}}
+                    <!-- Comp buttons VVVVVVVVVVVVVV -->
+                    <div id="film_button">
+                        <div class="btn-group p-3" role="group" aria-label="Second group">
+                            <button class="btn btn-primary" role="button" onclick="allComp()">
+                                Select User to compare
+                            </button>
                         </div>
-                        {% endif %}
-                        {% if franchises_details.tv_type is True %}
-                        <div class="col-md-auto">
-                            Seasons: {{franchises_details.tv_num}}
-                        </div>
-                        {% endif %}
-                        {% if franchises_details.oav_type is True %}
-                        <div class="col-md-auto">
-                            OAV's: {{franchises_details.oav_num}}
-                        </div>
-                        {% endif %}
                     </div>
-                    <div class="row m-1">
-                        {% if not franchises_user == none %}
-                        <div class="col-md-auto">
-                            <p>Average all users: {{franchises_user.user_opinion_average}}</p>
+                    <div id="tv_button">
+                        <div class="btn-group p-3" role="group" aria-label="Second group">
+                            <button class="btn btn-primary" role="button" aria-expanded="false" onclick="allComp()">
+                                Select User to compare
+                            </button>
                         </div>
-                        {% endif %}
-                        {% if franchises_user == none %}
-                        <div class="col-md-auto">
-                            <p>No one has rated this yet</p>
+                    </div>
+                    <!-- Comp buttons ^^^^^^^^^^^^^^ -->
+                    <!-- Main VVVVVVVVVVVVVV -->
+                    <div class="row">
+                        <div class="col">
+                            {% for film in films %}
+                            <div id="main_table" class="collapse multi-collapse" data-parent="#table_items">
+                            </div>
+                            {% endfor %}
+                            <div id="main_table" class="collapse show multi-collapse" data-parent="#table_items">
+                                <div class="row m-1 pt-3">
+                                    {% if franchises_details.film_type is True %}
+                                    <div class="col-md-auto">
+                                        Films: {{franchises_details.film_num}}
+                                    </div>
+                                    {% endif %}
+                                    {% if franchises_details.tv_type is True %}
+                                    <div class="col-md-auto">
+                                        Seasons: {{franchises_details.tv_num}}
+                                    </div>
+                                    {% endif %}
+                                    {% if franchises_details.oav_type is True %}
+                                    <div class="col-md-auto">
+                                        OAV's: {{franchises_details.oav_num}}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div class="row m-1">
+                                    {% if not franchises_user == none %}
+                                    <div class="col-md-auto">
+                                        <p>Average all users: {{franchises_user.user_opinion_average}}</p>
+                                    </div>
+                                    {% endif %}
+                                    {% if franchises_user == none %}
+                                    <div class="col-md-auto">
+                                        <p>No one has rated this yet</p>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
-                        {% endif %}
                     </div>
-                </div>
-                </div>
-            </div>            
-        <!-- Main ^^^^^^^^^^^^^^ -->
-        <!-- Films VVVVVVVVVVVVVV -->
-        <div class="row">            
-            {% for franchise_item_film in franchise_items_films %}
-            <div class="col">
-                <div id="film_table" class="collapse multi-collapse" data-parent="#table_items">
-                    <div class="card-body">
-                        {{user.username}}
-                        <table class="table table-hover">
-                            <thead class="table-primary">
-                                <tr>
-                                    <th scope="col">{{franchise_item_film.name}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="col">
-                                        {% if franchise_item_users_film == none or forloop.counter > franchise_item_users_film_num %}
-                                        Story: Not yet rated
-                                        {% endif %}
-                                        {% for franchise_item_user in franchise_item_users_film %}
-                                        {% if franchise_item_film.id == franchise_item_user.franchies_item_name.id %}
-                                        Story: {{franchise_item_user.story_opinion}}/5
-                                        {% endif %} 
-                                        {% endfor %}
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">
-                                        {% if franchise_item_users_film == none or forloop.counter > franchise_item_users_film_num %}
-                                        Animation: Not yet rated
-                                        {% endif %}
-                                        {% for franchise_item_user in franchise_item_users_film %}
-                                        {% if franchise_item_film.id == franchise_item_user.franchies_item_name.id %}
-                                        Animation: {{franchise_item_user.animation_opinion}}/5
-                                        {% endif %}
-                                        {% endfor %}
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">
-                                        {% if franchise_item_users_film == none or forloop.counter > franchise_item_users_film_num %}
-                                        Music: Not yet rated
-                                        {% endif %}
-                                        {% for franchise_item_user in franchise_item_users_film %}
-                                        {% if franchise_item_film.id == franchise_item_user.franchies_item_name.id %}
-                                        Music: {{franchise_item_user.music_opinion}}/5
-                                        {% endif %}
-                                        {% endfor %}
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">
-                                        {% if franchise_item_users_film == none or forloop.counter > franchise_item_users_film_num %}
-                                        Overall: Not yet rated
-                                        {% endif %}
-                                        {% for franchise_item_user in franchise_item_users_film %}
-                                        {% if franchise_item_film.id == franchise_item_user.franchies_item_name.id %}
-                                        Overall: {{franchise_item_user.user_opinion_average}}/5
-                                        {% endif %}
-                                        {% endfor %}
-                                    </th>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <!-- Main ^^^^^^^^^^^^^^ -->
+                    <!-- Films VVVVVVVVVVVVVV -->
+                    <div class="row">
+                        {% if films == none %}
+                        <div class="col">
+                            <div id="film_table" class="collapse multi-collapse" data-parent="#table_items">
+                                <div class="card-body">
+                                    <table class="table table-hover">
+                                        <thead class="table-primary">
+                                            <tr>
+                                                <th scope="col">No Items added</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            {% endfor %}
+                    {% endif %}
 
-            {% for franchise_item_film in franchise_items_films %}
-            <div class="col" id="film_table_comp_{{ forloop.counter }}">
-                <div id="film_table" class="collapse multi-collapse" data-parent="#table_items">
-                    <div class="card-body">
-                        Diff User Name
-                        <table class="table table-hover">
-                            <thead class="table-warning">
-                                <tr>
-                                    <th scope="col">{{franchise_item_film.name}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="col">Story: 2/5</th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Story: 2/5</th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Animation: 2/5</th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Music: 3/5</th>
-                                </tr>
-                            </tbody>
-                        </table>
+                    {% if not films == none %}
+                    {% for film in films %}
+                    <div class="col">
+                        <div id="film_table" class="collapse multi-collapse" data-parent="#table_items">
+                            <div class="card-body">
+                                {{user.username}}
+                                <table class="table table-hover">
+                                    <thead class="table-primary">
+                                        <tr>
+                                            <th scope="col">{{film.name}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="col">
+                                                Story: {{film.story}}/5
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">
+                                                Animation: {{film.animation}}/5
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">
+                                                Music: {{film.music}}/5
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">
+                                                Overall: {{film.overall}}/5
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        <!-- Films ^^^^^^^^^^^^^^^^^^ -->
-        <!-- TV VVVVVVVVVVVVV -->
-        <div class="row">
-            {% for franchise_items_tv in franchise_items_tvs %}
-            <div class="col">
-                <div id="tv_table" class="collapse multi-collapse" data-parent="#table_items">
-                    <div class="card-body">
-                        {{user.username}}
-                        <table class="table table-hover">
-                            <thead class="table-primary">
-                                <tr>
-                                    <th scope="col">{{franchise_items_tv.name}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="col">
-                                        {% if franchise_item_users_tv == none or forloop.counter > franchise_item_users_tv_num %}
-                                        Story: Not yet rated
-                                        {% endif %}
-                                        {% for franchise_item_user in franchise_item_users_tv %}
-                                        {% if franchise_items_tv.id == franchise_item_user.franchies_item_name.id %}
-                                        Story: {{franchise_item_user.story_opinion}}/5
-                                        {% endif %}
-                                        {% endfor %}
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">
-                                        {% if franchise_item_users_tv == none or forloop.counter > franchise_item_users_tv_num %}
-                                        Animation: Not yet rated
-                                        {% endif %}
-                                        {% for franchise_item_user in franchise_item_users_tv %}
-                                        {% if franchise_items_tv.id == franchise_item_user.franchies_item_name.id %}
-                                        Animation: {{franchise_item_user.animation_opinion}}/5
-                                        {% endif %}
-                                        {% endfor %}
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">
-                                        {% if franchise_item_users_tv == none or forloop.counter > franchise_item_users_tv_num %}
-                                        Music: Not yet rated
-                                        {% endif %}
-                                        {% for franchise_item_user in franchise_item_users_tv %}
-                                        {% if franchise_items_tv.id == franchise_item_user.franchies_item_name.id %}
-                                        Music: {{franchise_item_user.music_opinion}}/5
-                                        {% endif %}
-                                        {% endfor %}
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">
-                                        {% if franchise_item_users_tv == none or forloop.counter > franchise_item_users_tv_num %}
-                                        Overall: Not yet rated
-                                        {% endif %}
-                                        {% for franchise_item_user in franchise_item_users_tv %}
-                                        {% if franchise_items_tv.id == franchise_item_user.franchies_item_name.id %}
-                                        Overall: {{franchise_item_user.user_opinion_average}}/5
-                                        {% endif %}
-                                        {% endfor %}
-                                    </th>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+                    {% endfor %}
 
-            {% for franchise_items_tv in franchise_items_tvs %}
-            <div class="col" id="tv_table_comp_{{ forloop.counter }}">
-                <div id="tv_table" class="collapse multi-collapse" data-parent="#table_items">
-                    <div class="card-body">
-                        Diff User Name
-                        <table class="table table-hover">
-                            <thead class="table-warning">
-                                <tr>
-                                    <th scope="col">{{franchise_items_tv.name}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="col">Story: 2/5</th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Story: 2/5</th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Animation: 2/5</th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Music: 3/5</th>
-                                </tr>
-                            </tbody>
-                        </table>
+                    {% for film in films %}
+                    <div class="col" id="film_table_comp_{{ forloop.counter }}">
+                        <div id="film_table" class="collapse multi-collapse" data-parent="#table_items">
+                            <div class="card-body">
+                                Diff User Name
+                                <table class="table table-hover">
+                                    <thead class="table-warning">
+                                        <tr>
+                                            <th scope="col">{{film.name}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="col">Story: 2/5</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Story: 2/5</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Animation: 2/5</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Music: 3/5</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
+                    {% endfor %}
+                    {% endif %}
                 </div>
+                <!-- Films ^^^^^^^^^^^^^^^^^^ -->
+                <!-- TV VVVVVVVVVVVVV -->
+                <div class="row">
+                    {% for franchise_items_tv in franchise_items_tvs %}
+                    <div class="col">
+                        <div id="tv_table" class="collapse multi-collapse" data-parent="#table_items">
+                            <div class="card-body">
+                                {{user.username}}
+                                <table class="table table-hover">
+                                    <thead class="table-primary">
+                                        <tr>
+                                            <th scope="col">{{franchise_items_tv.name}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="col">
+                                                {% if franchise_item_users_tv == none or forloop.counter > franchise_item_users_tv_num %}
+                                                Story: Not yet rated
+                                                {% endif %}
+                                                {% for franchise_item_user in franchise_item_users_tv %}
+                                                {% if franchise_items_tv.id == franchise_item_user.franchies_item_name.id %}
+                                                Story: {{franchise_item_user.story_opinion}}/5
+                                                {% endif %}
+                                                {% endfor %}
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">
+                                                {% if franchise_item_users_tv == none or forloop.counter > franchise_item_users_tv_num %}
+                                                Animation: Not yet rated
+                                                {% endif %}
+                                                {% for franchise_item_user in franchise_item_users_tv %}
+                                                {% if franchise_items_tv.id == franchise_item_user.franchies_item_name.id %}
+                                                Animation: {{franchise_item_user.animation_opinion}}/5
+                                                {% endif %}
+                                                {% endfor %}
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">
+                                                {% if franchise_item_users_tv == none or forloop.counter > franchise_item_users_tv_num %}
+                                                Music: Not yet rated
+                                                {% endif %}
+                                                {% for franchise_item_user in franchise_item_users_tv %}
+                                                {% if franchise_items_tv.id == franchise_item_user.franchies_item_name.id %}
+                                                Music: {{franchise_item_user.music_opinion}}/5
+                                                {% endif %}
+                                                {% endfor %}
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">
+                                                {% if franchise_item_users_tv == none or forloop.counter > franchise_item_users_tv_num %}
+                                                Overall: Not yet rated
+                                                {% endif %}
+                                                {% for franchise_item_user in franchise_item_users_tv %}
+                                                {% if franchise_items_tv.id == franchise_item_user.franchies_item_name.id %}
+                                                Overall: {{franchise_item_user.user_opinion_average}}/5
+                                                {% endif %}
+                                                {% endfor %}
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    {% for franchise_items_tv in franchise_items_tvs %}
+                    <div class="col" id="tv_table_comp_{{ forloop.counter }}">
+                        <div id="tv_table" class="collapse multi-collapse" data-parent="#table_items">
+                            <div class="card-body">
+                                Diff User Name
+                                <table class="table table-hover">
+                                    <thead class="table-warning">
+                                        <tr>
+                                            <th scope="col">{{franchise_items_tv.name}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="col">Story: 2/5</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Story: 2/5</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Animation: 2/5</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Music: 3/5</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- TV ^^^^^^^^^^^^^ -->
             </div>
-            {% endfor %}
         </div>
-        <!-- TV ^^^^^^^^^^^^^ -->
     </div>
-</div>
-</div>
-</div>
+    </div>
 </body>
 {% endblock %}
