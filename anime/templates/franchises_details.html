@@ -130,7 +130,7 @@ function mainButton() {
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h5 class="modal-title" id="filmModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="filmModalLabel">New Film Item</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -155,7 +155,7 @@ function mainButton() {
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h5 class="modal-title" id="tvModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="tvModalLabel">New TV Item</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -164,6 +164,7 @@ function mainButton() {
                         {% csrf_token %}
                         {{franchises_details.franchies_name}}: TV
                         {{form.name}}
+                        <p></p>
                         Number of Ep:{{form.number_of_episodes}}                   
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -181,7 +182,7 @@ function mainButton() {
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h5 class="modal-title" id="oavModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="oavModalLabel">New OAV Item</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -190,6 +191,7 @@ function mainButton() {
                         {% csrf_token %}
                         {{franchises_details.franchies_name}}: OAV
                         {{form.name}}
+                        <p></p>
                         Number of Ep:{{form.number_of_episodes}}                   
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
