@@ -107,6 +107,7 @@ class EpisidesUser(models.Model):
     franchies_item_name = models.ForeignKey(FranchiseItem, on_delete=models.PROTECT)
     episode_number = models.ForeignKey(Episides, on_delete=models.PROTECT)
     user_opinion = models.IntegerField()
+    author = models.ForeignKey(User, default=None, on_delete=models.PROTECT)
 
 
 class Music(models.Model):

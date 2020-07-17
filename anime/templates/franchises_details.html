@@ -3,12 +3,11 @@
 {% block content %}
 <script type="text/javascript">
 
-
     function firstLoad() {
         {% for film in films %}
         document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'none';
         {% endfor %}
-        {% for franchise_item_tv in franchise_items_tvs %}
+        {% for tv in tvs %}
         document.getElementById('tv_table_comp_{{forloop.counter}}').style.display = 'none';
         {% endfor %}
         document.getElementById('film_button').style.display = 'none';
@@ -40,7 +39,7 @@
 
 
     function tvComp() {
-        {% for franchise_item_tv in franchise_items_tvs %}
+        {% for tv in tvs %}
         var tv_comp_toggle = document.getElementById('tv_table_comp_{{forloop.counter}}')
         if (tv_comp_toggle.style.display === "block") {
             tv_comp_toggle.style.display = 'none';
@@ -309,22 +308,22 @@
                                     <tbody>
                                         <tr>
                                             <th scope="col">
-                                                Story: {{film.story}}/5
+                                                Story: {{film.story}}
                                             </th>
                                         </tr>
                                         <tr>
                                             <th scope="col">
-                                                Animation: {{film.animation}}/5
+                                                Animation: {{film.animation}}
                                             </th>
                                         </tr>
                                         <tr>
                                             <th scope="col">
-                                                Music: {{film.music}}/5
+                                                Music: {{film.music}}
                                             </th>
                                         </tr>
                                         <tr>
-                                            <th scope="col">
-                                                Overall: {{film.overall}}/5
+                                            <th class="table-secondary" scope="col">
+                                                Overall: {{film.overall}}
                                             </th>
                                         </tr>
                                     </tbody>
@@ -350,14 +349,17 @@
                                             <th scope="col">Story: 2/5</th>
                                         </tr>
                                         <tr>
-                                            <th scope="col">Story: 2/5</th>
-                                        </tr>
-                                        <tr>
                                             <th scope="col">Animation: 2/5</th>
                                         </tr>
                                         <tr>
                                             <th scope="col">Music: 3/5</th>
                                         </tr>
+                                        <tr>
+                                            <th scope="col" class="table-secondary">
+                                                overall: 3/5
+                                            </th>
+                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -369,7 +371,7 @@
                 <!-- Films ^^^^^^^^^^^^^^^^^^ -->
                 <!-- TV VVVVVVVVVVVVV -->
                 <div class="row">
-                    {% for franchise_items_tv in franchise_items_tvs %}
+                    {% for tv in tv_list %}
                     <div class="col">
                         <div id="tv_table" class="collapse multi-collapse" data-parent="#table_items">
                             <div class="card-body">
@@ -377,56 +379,43 @@
                                 <table class="table table-hover">
                                     <thead class="table-primary">
                                         <tr>
-                                            <th scope="col">{{franchise_items_tv.name}}</th>
+                                            <th scope="col">{{tv.name}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <th scope="col">
-                                                {% if franchise_item_users_tv == none or forloop.counter > franchise_item_users_tv_num %}
-                                                Story: Not yet rated
-                                                {% endif %}
-                                                {% for franchise_item_user in franchise_item_users_tv %}
-                                                {% if franchise_items_tv.id == franchise_item_user.franchies_item_name.id %}
-                                                Story: {{franchise_item_user.story_opinion}}/5
-                                                {% endif %}
-                                                {% endfor %}
+                                                story: {{tv.story}}
                                             </th>
                                         </tr>
                                         <tr>
                                             <th scope="col">
-                                                {% if franchise_item_users_tv == none or forloop.counter > franchise_item_users_tv_num %}
-                                                Animation: Not yet rated
-                                                {% endif %}
-                                                {% for franchise_item_user in franchise_item_users_tv %}
-                                                {% if franchise_items_tv.id == franchise_item_user.franchies_item_name.id %}
-                                                Animation: {{franchise_item_user.animation_opinion}}/5
-                                                {% endif %}
-                                                {% endfor %}
+                                                animation: {{tv.animation}}
                                             </th>
                                         </tr>
                                         <tr>
                                             <th scope="col">
-                                                {% if franchise_item_users_tv == none or forloop.counter > franchise_item_users_tv_num %}
-                                                Music: Not yet rated
-                                                {% endif %}
-                                                {% for franchise_item_user in franchise_item_users_tv %}
-                                                {% if franchise_items_tv.id == franchise_item_user.franchies_item_name.id %}
-                                                Music: {{franchise_item_user.music_opinion}}/5
-                                                {% endif %}
-                                                {% endfor %}
+                                                music: {{tv.music}}
                                             </th>
                                         </tr>
-                                        <tr>
-                                            <th scope="col">
-                                                {% if franchise_item_users_tv == none or forloop.counter > franchise_item_users_tv_num %}
-                                                Overall: Not yet rated
-                                                {% endif %}
-                                                {% for franchise_item_user in franchise_item_users_tv %}
-                                                {% if franchise_items_tv.id == franchise_item_user.franchies_item_name.id %}
-                                                Overall: {{franchise_item_user.user_opinion_average}}/5
-                                                {% endif %}
+                                        {% if tv.ep_items == 0 %}
+                                            <tr>
+                                                <th class="table-light" scope="col">
+                                                    No episodes added yet
+                                                </th>
+                                            </tr>
+                                        {% else %}
+                                                {% for ep in tv.episode_list%}
+                                                    <tr>
+                                                        <th class="table-light  " scope="col">
+                                                        Episode {{ep.name}}: {{ep.rate}}
+                                                        </th>
+                                                    </tr>
                                                 {% endfor %}
+                                        {% endif %}
+                                        <tr>
+                                            <th scope="col" class="table-secondary">
+                                                overall: {{tv.overall}}
                                             </th>
                                         </tr>
                                     </tbody>
@@ -436,7 +425,7 @@
                     </div>
                     {% endfor %}
 
-                    {% for franchise_items_tv in franchise_items_tvs %}
+                    {% for tv in tv_list %}
                     <div class="col" id="tv_table_comp_{{ forloop.counter }}">
                         <div id="tv_table" class="collapse multi-collapse" data-parent="#table_items">
                             <div class="card-body">
@@ -444,13 +433,10 @@
                                 <table class="table table-hover">
                                     <thead class="table-warning">
                                         <tr>
-                                            <th scope="col">{{franchise_items_tv.name}}</th>
+                                            <th scope="col">{{tv.name}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="col">Story: 2/5</th>
-                                        </tr>
                                         <tr>
                                             <th scope="col">Story: 2/5</th>
                                         </tr>
@@ -459,6 +445,26 @@
                                         </tr>
                                         <tr>
                                             <th scope="col">Music: 3/5</th>
+                                        </tr>
+                                        {% if tv.ep_items == 0 %}
+                                            <tr>
+                                                <th class="table-light" scope="col">
+                                                    No episodes added yet
+                                                </th>
+                                            </tr>
+                                        {% else %}
+                                                {% for ep in tv.episode_list%}
+                                                    <tr>
+                                                        <th class="table-light  " scope="col">
+                                                        Episode {{ep.name}}: 3/5
+                                                        </th>
+                                                    </tr>
+                                                {% endfor %}
+                                        {% endif %}
+                                        <tr>
+                                            <th scope="col" class="table-secondary">
+                                                overall: 3/5
+                                            </th>
                                         </tr>
                                     </tbody>
                                 </table>
