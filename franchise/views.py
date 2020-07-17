@@ -49,7 +49,7 @@ class Item:
 def index(request):
     franchises = Franchise.objects.all()
     franchiseitems = FranchiseItem.objects.all()
-    return render(request, 'anime.html', {'franchises': franchises, 'franchiseitems': franchiseitems, })
+    return render(request, 'franchise.html', {'franchises': franchises, 'franchiseitems': franchiseitems, })
 
 
 @login_required(login_url="/signup/login")
@@ -179,7 +179,7 @@ def franchise_create(request):
                 form_instance.oav_type = False
             # This is for working out what franchise types their are ^^^^
             form_instance.save()
-            return redirect('anime')
+            return redirect('franchise')
     else:
         form = forms.CreateFranchise()
     return render(request, 'franchise_create.html', {'form': form})

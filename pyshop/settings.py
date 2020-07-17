@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products.apps.ProductsConfig',
-    'anime.apps.AnimeConfig',
+    'franchise.apps.FranchiseConfig',
     'accounts.apps.AccountsConfig',
     'debug_toolbar'
    
