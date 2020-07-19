@@ -4,31 +4,20 @@
 <script type="text/javascript">
 
     function firstLoad() {
-        {% for film in films %}
-        document.getElementById('film_table_comp_{{forloop.counter}}').style.display = 'none';
-        {% endfor %}
-        {% for tv in tvs %}
-        document.getElementById('tv_table_comp_{{forloop.counter}}').style.display = 'none';
-        {% endfor %}
-        document.getElementById('film_button').style.display = 'none';
-        document.getElementById('tv_button').style.display = 'none';
+        document.getElementById('film_table_comp_1').style.display = 'none';
+        document.getElementById('tv_table_comp_1').style.display = 'none';
     }
     function filmComp() {
 
-        {% for film in films %}
-        var film_comp_toggle = document.getElementById('film_table_comp_{{forloop.counter}}')
+        var film_comp_toggle = document.getElementById('film_table_comp_1')
         if (film_comp_toggle.style.display === "block") {
             film_comp_toggle.style.display = 'none';
-            console.log('film_table_comp_{{forloop.counter}}:none');
         } else {
             film_comp_toggle.style.display = 'block';
-            console.log('film_table_comp_{{forloop.counter}}:block');
         }
-        {% endfor %}
     }
     function filmButton() {
         var tv_comp_toggle_show = document.getElementById('tv_button')
-        var film_comp_toggle_show = document.getElementById('film_button')
         if (film_comp_toggle_show.style.display === "none") {
             film_comp_toggle_show.style.display = "block";
             tv_comp_toggle_show.style.display = "none";
@@ -39,22 +28,15 @@
 
 
     function tvComp() {
-        {% for tv in tvs %}
-        var tv_comp_toggle = document.getElementById('tv_table_comp_{{forloop.counter}}')
+        var tv_comp_toggle = document.getElementById('tv_table_comp_1')
         if (tv_comp_toggle.style.display === "block") {
             tv_comp_toggle.style.display = 'none';
-            // tv_comp_toggle.class = '';
-            console.log('tv_table_comp_{{forloop.counter}}:none');
         } else {
             tv_comp_toggle.style.display = 'block';
-            // tv_comp_toggle.class = 'col';
-            console.log('tv_table_comp_{{forloop.counter}}:block');
         }
-        {% endfor %}
     }
     function tvButton() {
         var tv_comp_toggle_show = document.getElementById('tv_button')
-        var film_comp_toggle_show = document.getElementById('film_button')
         if (tv_comp_toggle_show.style.display === "none") {
             tv_comp_toggle_show.style.display = "block";
             film_comp_toggle_show.style.display = "none";
@@ -70,7 +52,6 @@
 
     function mainButton() {
         var tv_comp_toggle_show = document.getElementById('tv_button')
-        var film_comp_toggle_show = document.getElementById('film_button')
         if (tv_comp_toggle_show.style.display === "block") {
             tv_comp_toggle_show.style.display = "none";
         }
@@ -83,6 +64,8 @@
 
 <body onload="firstLoad()">
 
+
+    <!-- Top selector VVVVVVVVVVVVVVVV-->
     <div class="card">
         <div class="card-header">
             <div class="btn-group mr-2" role="group" aria-label="main group">
@@ -122,8 +105,9 @@
             </div>
         </div>
     </div>
+    <!-- Top selector ^^^^^^^^^^^^^^^^-->
 
-
+    <!-- Add items VVVVVVVVVVVVVVV-->
     <div class="form-group">
         <form action="/{{franchises_details.franchise_slug}}" method="POST" enctype="multipart/form-data">
             <div class="modal fade" id="filmModal" tabindex="-1" role="dialog" aria-labelledby="filmModalLabel"
@@ -206,7 +190,7 @@
             </div>
         </form>
     </div>
-
+    <!-- Add items ^^^^^^^^^^^^^^^-->
 
     <div id="table_items">
         <div class="jumbotron">
@@ -218,20 +202,20 @@
                 </div>
                 <div class="col-10">
                     <!-- Comp buttons VVVVVVVVVVVVVV -->
-                    <div id="film_button">
+                    <!-- <div id="film_button">
                         <div class="btn-group p-3" role="group" aria-label="Second group">
-                            <button class="btn btn-primary" role="button" onclick="allComp()">
+                            <button class="btn btn-secondary" role="button" onclick="allComp()">
                                 Select User to compare
                             </button>
                         </div>
-                    </div>
-                    <div id="tv_button">
+                    </div> -->
+                    <!-- <div id="tv_button">
                         <div class="btn-group p-3" role="group" aria-label="Second group">
-                            <button class="btn btn-primary" role="button" aria-expanded="false" onclick="allComp()">
+                            <button class="btn btn-secondary" role="button" aria-expanded="false" onclick="allComp()">
                                 Select User to compare
                             </button>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- Comp buttons ^^^^^^^^^^^^^^ -->
                     <!-- Main VVVVVVVVVVVVVV -->
                     <div class="row">
@@ -275,208 +259,302 @@
                     </div>
                     <!-- Main ^^^^^^^^^^^^^^ -->
                     <!-- Films VVVVVVVVVVVVVV -->
-                    <div class="row">
-                        {% if films == none %}
-                        <div class="col">
-                            <div id="film_table" class="collapse multi-collapse" data-parent="#table_items">
-                                <div class="card-body">
-                                    <table class="table table-hover">
-                                        <thead class="table-primary">
-                                            <tr>
-                                                <th scope="col">No Items added</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
+                    <div id="film_table" class="collapse multi-collapse" data-parent="#table_items">
+                        <div id="film_item">
+                            <div class="btn-toolbar" role="toolbar" aria-label="film_toolbar">
+                                <div class="btn-group p-3" role="group" aria-label="film_group_list">
+                                    {% for film in films %}
+                                    <button class="btn btn-secondary" type="button" data-toggle="collapse"
+                                        data-target="#film_{{ forloop.counter }}" aria-expanded="false"
+                                        aria-controls="film_{{ forloop.counter }}">
+                                        {{film.name}}
+                                    </button>
+                                    {% endfor %}
+                                </div>
+                                <div class="btn-group p-3" role="group" aria-label="film_group_list">
+                                    <button class="btn btn-secondary" role="button" onclick="allComp()">
+                                        Select User to compare
+                                    </button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    {% endif %}
-
-                    {% if not films == none %}
-                    {% for film in films %}
-                    <div class="col">
-                        <div id="film_table" class="collapse multi-collapse" data-parent="#table_items">
-                            <div class="card-body">
-                                {{user.username}}
-                                <table class="table table-hover">
-                                    <thead class="table-primary">
-                                        <tr>
-                                            <th scope="col">{{film.name}}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="col">
-                                                Story: {{film.story}}
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="col">
-                                                Animation: {{film.animation}}
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="col">
-                                                Music: {{film.music}}
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th class="table-secondary" scope="col">
-                                                Overall: {{film.overall}}
-                                            </th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-
-                    {% for film in films %}
-                    <div class="col" id="film_table_comp_{{ forloop.counter }}">
-                        <div id="film_table" class="collapse multi-collapse" data-parent="#table_items">
-                            <div class="card-body">
-                                Diff User Name
-                                <table class="table table-hover">
-                                    <thead class="table-warning">
-                                        <tr>
-                                            <th scope="col">{{film.name}}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="col">Story: 2/5</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="col">Animation: 2/5</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="col">Music: 3/5</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="col" class="table-secondary">
-                                                overall: 3/5
-                                            </th>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-                <!-- Films ^^^^^^^^^^^^^^^^^^ -->
-                <!-- TV VVVVVVVVVVVVV -->
-                <div class="row">
-                    {% for tv in tv_list %}
-                    <div class="col">
-                        <div id="tv_table" class="collapse multi-collapse" data-parent="#table_items">
-                            <div class="card-body">
-                                {{user.username}}
-                                <table class="table table-hover">
-                                    <thead class="table-primary">
-                                        <tr>
-                                            <th scope="col">{{tv.name}}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="col">
-                                                story: {{tv.story}}
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="col">
-                                                animation: {{tv.animation}}
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="col">
-                                                music: {{tv.music}}
-                                            </th>
-                                        </tr>
-                                        {% if tv.ep_items == 0 %}
-                                            <tr>
-                                                <th class="table-light" scope="col">
-                                                    No episodes added yet
-                                                </th>
-                                            </tr>
+                            <div class="row">
+                                <div class="col">
+                                    {% for film in films %}
+                                    {% if forloop.counter == 1 %}
+                                    <div id="film_{{ forloop.counter }}" class="show collapse" data-parent="#film_item">
                                         {% else %}
-                                                {% for ep in tv.episode_list%}
-                                                    <tr>
-                                                        <th class="table-light  " scope="col">
-                                                        Episode {{ep.name}}: {{ep.rate}}
-                                                        </th>
-                                                    </tr>
-                                                {% endfor %}
-                                        {% endif %}
-                                        <tr>
-                                            <th scope="col" class="table-secondary">
-                                                overall: {{tv.overall}}
-                                            </th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
+                                        <div id="film_{{ forloop.counter }}" class="collapse" data-parent="#film_item">
+                                            {% endif %}
+                                            <div class="card-body">
+                                                {{user.username}}
+                                                <table class="table table-hover">
+                                                    <thead class="table-primary">
+                                                        <tr>
+                                                            <th scope="col">{{film.name}}</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="col">
+                                                                Story: {{film.story}}
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="col">
+                                                                Animation: {{film.animation}}
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="col">
+                                                                Music: {{film.music}}
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="table-secondary" scope="col">
+                                                                Overall: {{film.overall}}
+                                                            </th>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="col" id="film_table_comp_1">
+                                        {% for film in films %}
+                                        {% if forloop.counter == 1 %}
+                                        <div id="film_{{ forloop.counter }}" class="show collapse"
+                                            data-parent="#film_item">
+                                            {% else %}
+                                            <div id="film_{{ forloop.counter }}" class="collapse"
+                                                data-parent="#film_item">
+                                                {% endif %}
+                                                <div class="card-body">
+                                                    Diff User Name
+                                                    <table class="table table-hover">
+                                                        <thead class="table-warning">
+                                                            <tr>
+                                                                <th scope="col">{{film.name}} TEst</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="col">Story: 2/5</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="col">Animation: 2/5</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="col">Music: 3/5</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="col" class="table-secondary">
+                                                                    overall: 3/5
+                                                                </th>
+                                                            </tr>
 
-                    {% for tv in tv_list %}
-                    <div class="col" id="tv_table_comp_{{ forloop.counter }}">
-                        <div id="tv_table" class="collapse multi-collapse" data-parent="#table_items">
-                            <div class="card-body">
-                                Diff User Name
-                                <table class="table table-hover">
-                                    <thead class="table-warning">
-                                        <tr>
-                                            <th scope="col">{{tv.name}}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="col">Story: 2/5</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="col">Animation: 2/5</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="col">Music: 3/5</th>
-                                        </tr>
-                                        {% if tv.ep_items == 0 %}
-                                            <tr>
-                                                <th class="table-light" scope="col">
-                                                    No episodes added yet
-                                                </th>
-                                            </tr>
-                                        {% else %}
-                                                {% for ep in tv.episode_list%}
-                                                    <tr>
-                                                        <th class="table-light  " scope="col">
-                                                        Episode {{ep.name}}: 3/5
-                                                        </th>
-                                                    </tr>
-                                                {% endfor %}
-                                        {% endif %}
-                                        <tr>
-                                            <th scope="col" class="table-secondary">
-                                                overall: 3/5
-                                            </th>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
+
+
+                            {% if films == none %}
+                            <div class="row">
+                                <div class="col">
+                                    <div id="film_table" class="collapse multi-collapse" data-parent="#table_items">
+                                        <div class="card-body">
+                                            <table class="table table-hover">
+                                                <thead class="table-primary">
+                                                    <tr>
+                                                        <th scope="col">No Items added</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+
+
+
+
+
+
+
+                            <!-- Films ^^^^^^^^^^^^^^^^^^ -->
+                            <!-- TV VVVVVVVVVVVVV -->
+                            <div id="tv_table" class="collapse multi-collapse" data-parent="#table_items">
+                                <div id="tv_item">
+                                    <div class="btn-toolbar" role="toolbar" aria-label="tv_toolbar">
+                                        <div class="btn-group p-3" role="group" aria-label="tv_group_list">
+                                            {% for tv in tvs %}
+                                            <button class="btn btn-secondary" type="button" data-toggle="collapse"
+                                                data-target="#tv_{{ forloop.counter }}" aria-expanded="false"
+                                                aria-controls="tv_{{ forloop.counter }}">
+                                                {{tv.name}}
+                                            </button>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="btn-group p-3" role="group" aria-label="tv_group_list">
+                                            <button class="btn btn-secondary" role="button" onclick="allComp()">
+                                                Select User to compare
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            {% for tv in tvs %}
+                                            {% if forloop.counter == 1 %}
+                                            <div id="tv_{{ forloop.counter }}" class="show collapse"
+                                                data-parent="#tv_item">
+                                                {% else %}
+                                                <div id="tv_{{ forloop.counter }}" class="collapse"
+                                                    data-parent="#tv_item">
+                                                    {% endif %}
+                                                    <div class="card-body">
+                                                        {{user.username}}
+                                                        <table class="table table-hover">
+                                                            <thead class="table-primary">
+                                                                <tr>
+                                                                    <th scope="col">{{tv.name}}</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="col">
+                                                                        story: {{tv.story}}
+                                                                    </th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="col">
+                                                                        animation: {{tv.animation}}
+                                                                    </th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="col">
+                                                                        music: {{tv.music}}
+                                                                    </th>
+                                                                </tr>
+                                                                {% if tv.ep_items == 0 %}
+                                                                <tr>
+                                                                    <th class="table-light" scope="col">
+                                                                        No episodes added yet
+                                                                    </th>
+                                                                </tr>
+                                                                {% else %}
+                                                                {% for ep in tv.episode_list%}
+                                                                <tr>
+                                                                    <th class="table-light" scope="col">
+                                                                        Episode {{ep.name}}: {{ep.rate}}
+                                                                    </th>
+                                                                </tr>
+                                                                {% endfor %}
+                                                                {% endif %}
+                                                                <tr>
+                                                                    <th scope="col" class="table-secondary">
+                                                                        overall: {{tv.overall}}
+                                                                    </th>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                            <div class="col" id="tv_table_comp_1">
+                                                {% for tv in tvs %}
+                                                {% if forloop.counter == 1 %}
+                                                <div id="tv_{{ forloop.counter }}" class="show collapse"
+                                                    data-parent="#tv_item">
+                                                    {% else %}
+                                                    <div id="tv_{{ forloop.counter }}" class="collapse"
+                                                        data-parent="#tv_item">
+                                                        {% endif %}
+                                                        <div class="card-body">
+                                                            Diff User Name
+                                                            <table class="table table-hover">
+                                                                <thead class="table-warning">
+                                                                    <tr>
+                                                                        <th scope="col">{{tv.name}}</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="col">Story: 2/5</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="col">Animation: 2/5</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="col">Music: 3/5</th>
+                                                                    </tr>
+                                                                    {% if tv.ep_items == 0 %}
+                                                                    <tr>
+                                                                        <th class="table-light" scope="col">
+                                                                            No episodes added yet
+                                                                        </th>
+                                                                    </tr>
+                                                                    {% else %}
+                                                                    {% for ep in tv.episode_list%}
+                                                                    <tr>
+                                                                        <th class="table-light" scope="col">
+                                                                            Episode {{ep.name}}: 3/5
+                                                                        </th>
+                                                                    </tr>
+                                                                    {% endfor %}
+                                                                    {% endif %}
+                                                                    <tr>
+                                                                        <th scope="col" class="table-secondary">
+                                                                            overall: 3/5
+                                                                        </th>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    {% if tvs == none %}
+                                    <div class="row">
+                                        <div class="col">
+                                            <div id="film_table" class="collapse multi-collapse"
+                                                data-parent="#table_items">
+                                                <div class="card-body">
+                                                    <table class="table table-hover">
+                                                        <thead class="table-primary">
+                                                            <tr>
+                                                                <th scope="col">No Items added</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- TV ^^^^^^^^^^^^^ -->
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
-                <!-- TV ^^^^^^^^^^^^^ -->
             </div>
         </div>
-    </div>
     </div>
 </body>
 {% endblock %}
