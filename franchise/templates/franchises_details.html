@@ -396,7 +396,7 @@
                                 <div id="tv_item">
                                     <div class="btn-toolbar" role="toolbar" aria-label="tv_toolbar">
                                         <div class="btn-group p-3" role="group" aria-label="tv_group_list">
-                                            {% for tv in tv_list %}
+                                            {% for tv in tvs %}
                                             <button class="btn btn-secondary" type="button" data-toggle="collapse"
                                                 data-target="#tv_{{ forloop.counter }}" aria-expanded="false"
                                                 aria-controls="tv_{{ forloop.counter }}">
@@ -412,7 +412,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            {% for tv in tv_list %}
+                                            {% for tv in tvs %}
                                             {% if forloop.counter == 1 %}
                                             <div id="tv_{{ forloop.counter }}" class="show collapse"
                                                 data-parent="#tv_item">
@@ -471,7 +471,7 @@
                                                 {% endfor %}
                                             </div>
                                             <div class="col" id="tv_table_comp_1">
-                                                {% for tv in tv_list %}
+                                                {% for tv in tvs %}
                                                 {% if forloop.counter == 1 %}
                                                 <div id="tv_{{ forloop.counter }}" class="show collapse"
                                                     data-parent="#tv_item">
@@ -529,7 +529,7 @@
 
 
 
-                                    {% if tv_list == none %}
+                                    {% if tvs == none %}
                                     <div class="row">
                                         <div class="col">
                                             <div id="film_table" class="collapse multi-collapse"

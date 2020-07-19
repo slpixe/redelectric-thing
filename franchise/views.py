@@ -105,7 +105,7 @@ def franchise_details(request, franchise_slug):
                 films.append(Item(film_item.name, 0, film_item.stroy, film_item.animation, film_item.music, film_item.overall,None))
         # Film code ^^^^^
         # TV code VVVVV
-        tvs = FranchiseItem.objects.filter(franchies_name=franchises_details.id, area_type="TV").prefetch_related(
+        tv_items = FranchiseItem.objects.filter(franchies_name=franchises_details.id, area_type="TV").prefetch_related(
             Prefetch(
                 'franchiseitemuser_set',
                 queryset=FranchiseItemUser.objects.filter(author=request.user)
@@ -121,9 +121,9 @@ def franchise_details(request, franchise_slug):
                 queryset=EpisidesUser.objects.all()
                 )
             ).all()
-        tv_list = []
+        tvs = []
         
-        for tv_item in tvs:
+        for tv_item in tv_items:
             tv_item.stroy = "Not Yet Rated"
             tv_item.animation = "Not Yet Rated"
             tv_item.music = "Not Yet Rated"
@@ -133,7 +133,7 @@ def franchise_details(request, franchise_slug):
                 tv_item.animation = (f'{tv_rate.animation_opinion}{rate_max}')
                 tv_item.music = (f'{tv_rate.music_opinion}{rate_max}')
                 tv_item.overall = (f'{tv_rate.user_opinion_average}{rate_max}')
-            tv_list.append(Item(tv_item.name,0,tv_item.stroy,tv_item.animation,tv_item.music,tv_item.overall,tv_item.episides_set.all()))
+            tvs.append(Item(tv_item.name,0,tv_item.stroy,tv_item.animation,tv_item.music,tv_item.overall,tv_item.episides_set.all()))
         # TV code ^^^^^
         try:
             franchises_user = FranchiseUser.objects.get(
@@ -147,8 +147,7 @@ def franchise_details(request, franchise_slug):
         'form': form,
         'area': area,
         "films":films,
-        "tvs":tvs,
-        "tv_list":tv_list
+        "tvs":tvs
     }
 
     return render(request, 'franchises_details.html', compinants)
