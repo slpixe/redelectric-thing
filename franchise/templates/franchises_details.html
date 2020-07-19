@@ -371,7 +371,7 @@
                                     <div id="film_table" class="collapse multi-collapse" data-parent="#table_items">
                                         <div class="card-body">
                                             <table class="table table-hover">
-                                                <thead class="table-primary">
+                                                <thead class="table-danger">
                                                     <tr>
                                                         <th scope="col">No Items added</th>
                                                     </tr>
@@ -428,37 +428,69 @@
                                                                     <th scope="col">{{tv.name}}</th>
                                                                 </tr>
                                                             </thead>
+                                                        </table>
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col" class="table-light">
+                                                                        Episodes:
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                        </table>
+                                                        <div class="col">
+                                                            <table class="table table-hover">
+                                                                <tbody>                                                        
+                                                                    {% if tv.ep_items == 0 %}
+                                                                    <tr>
+                                                                        <th class="table-danger" scope="col">
+                                                                            No episodes added yet
+                                                                        </th>
+                                                                    </tr>
+                                                                    {% else %}
+                                                                    {% for ep in tv.episode_list%}
+                                                                    <tr>
+                                                                        <th class="table" scope="col">
+                                                                            Episode {{ep.name}}: {{ep.rate}}
+                                                                        </th>
+                                                                    </tr>
+                                                                    {% endfor %}
+                                                                    {% endif %}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <table class="table table-hover">
                                                             <tbody>
                                                                 <tr>
-                                                                    <th scope="col">
-                                                                        story: {{tv.story}}
+                                                                    <th scope="col" class="table-light">
+                                                                        Attributes:
                                                                     </th>
                                                                 </tr>
-                                                                <tr>
-                                                                    <th scope="col">
-                                                                        animation: {{tv.animation}}
-                                                                    </th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="col">
-                                                                        music: {{tv.music}}
-                                                                    </th>
-                                                                </tr>
-                                                                {% if tv.ep_items == 0 %}
-                                                                <tr>
-                                                                    <th class="table-light" scope="col">
-                                                                        No episodes added yet
-                                                                    </th>
-                                                                </tr>
-                                                                {% else %}
-                                                                {% for ep in tv.episode_list%}
-                                                                <tr>
-                                                                    <th class="table-light" scope="col">
-                                                                        Episode {{ep.name}}: {{ep.rate}}
-                                                                    </th>
-                                                                </tr>
-                                                                {% endfor %}
-                                                                {% endif %}
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="col">
+                                                            <table class="table table-hover">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="col">
+                                                                            story: {{tv.story}}
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="col">
+                                                                            animation: {{tv.animation}}
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="col">
+                                                                            music: {{tv.music}}
+                                                                        </th>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <table class="table table-hover">
+                                                            <tbody>
                                                                 <tr>
                                                                     <th scope="col" class="table-secondary">
                                                                         overall: {{tv.overall}}
@@ -486,32 +518,64 @@
                                                                     <tr>
                                                                         <th scope="col">{{tv.name}}</th>
                                                                     </tr>
+                                                                </thead>                                                                
+                                                            </table>
+                                                            <table class="table table-hover">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col" class="table-light">
+                                                                            Episodes:
+                                                                        </th>
+                                                                    </tr>
                                                                 </thead>
+                                                            </table>
+                                                            <div class="col">
+                                                                <table class="table table-hover">
+                                                                    <tbody>
+                                                                        {% if tv.ep_items == 0 %}
+                                                                        <tr>
+                                                                            <th class="table-danger" scope="col">
+                                                                                No episodes added yet
+                                                                            </th>
+                                                                        </tr>
+                                                                        {% else %}
+                                                                        {% for ep in tv.episode_list%}
+                                                                        <tr>
+                                                                            <th scope="col">
+                                                                                Episode {{ep.name}}: 3/5
+                                                                            </th>
+                                                                        </tr>
+                                                                        {% endfor %}
+                                                                        {% endif %}
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <table class="table table-hover">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <th scope="col">Story: 2/5</th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th scope="col">Animation: 2/5</th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th scope="col">Music: 3/5</th>
-                                                                    </tr>
-                                                                    {% if tv.ep_items == 0 %}
-                                                                    <tr>
-                                                                        <th class="table-light" scope="col">
-                                                                            No episodes added yet
+                                                                        <th scope="col" class="table-light">
+                                                                            Attributes:
                                                                         </th>
                                                                     </tr>
-                                                                    {% else %}
-                                                                    {% for ep in tv.episode_list%}
-                                                                    <tr>
-                                                                        <th class="table-light" scope="col">
-                                                                            Episode {{ep.name}}: 3/5
-                                                                        </th>
-                                                                    </tr>
-                                                                    {% endfor %}
-                                                                    {% endif %}
+                                                                </tbody>
+                                                            </table>
+                                                            <div class="col">
+                                                                <table class="table table-hover">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th scope="col">Story: 2/5</th>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="col">Animation: 2/5</th>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="col">Music: 3/5</th>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <table class="table table-hover">
+                                                                <tbody>
                                                                     <tr>
                                                                         <th scope="col" class="table-secondary">
                                                                             overall: 3/5
@@ -536,7 +600,7 @@
                                                 data-parent="#table_items">
                                                 <div class="card-body">
                                                     <table class="table table-hover">
-                                                        <thead class="table-primary">
+                                                        <thead class="table-danger">
                                                             <tr>
                                                                 <th scope="col">No Items added</th>
                                                             </tr>
