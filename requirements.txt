@@ -1,0 +1,5 @@
+virtualenv
+django
+django-debug-toolbar
+slugify
+Pillow
